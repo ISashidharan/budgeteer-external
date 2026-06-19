@@ -1,0 +1,61 @@
+---
+/**
+ * Inline Budgeteer logo (mark + optional wordmark). Mirrors the app's
+ * favicon.svg so the brand reads identically across site and product.
+ */
+interface Props {
+  /** Pixel size of the square mark. */
+  size?: number;
+  /** Show the "Budgeteer" wordmark next to the mark. */
+  withText?: boolean;
+  class?: string;
+}
+const { size = 36, withText = true, class: className = "" } = Astro.props;
+const r = size; // viewBox is square
+---
+
+<span class={`inline-flex items-center gap-2.5 ${className}`}>
+  <svg
+    width={r}
+    height={r}
+    viewBox="0 0 512 512"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    aria-label="Budgeteer"
+    class="shrink-0"
+  >
+    <defs>
+      <linearGradient id="lg-tile" x1="64" y1="48" x2="448" y2="464" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#14B8A6"></stop>
+        <stop offset="0.55" stop-color="#0D9488"></stop>
+        <stop offset="1" stop-color="#0F766E"></stop>
+      </linearGradient>
+      <linearGradient id="lg-coin" x1="300" y1="116" x2="408" y2="216" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#FDBA74"></stop>
+        <stop offset="0.5" stop-color="#F97316"></stop>
+        <stop offset="1" stop-color="#EA580C"></stop>
+      </linearGradient>
+    </defs>
+    <rect x="32" y="32" width="448" height="448" rx="112" fill="url(#lg-tile)"></rect>
+    <rect x="120" y="288" width="62" height="98" rx="22" fill="#FFFFFF" fill-opacity="0.55"></rect>
+    <rect x="200" y="240" width="62" height="146" rx="22" fill="#FFFFFF" fill-opacity="0.78"></rect>
+    <rect x="280" y="186" width="62" height="200" rx="22" fill="#FFFFFF"></rect>
+    <circle cx="354" cy="166" r="58" fill="url(#lg-coin)"></circle>
+    <path d="M354 130 L354 202" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round"></path>
+    <path
+      d="M373 147 C373 137 363 132 352 132 C340 132 332 139 332 149 C332 159 341 163 354 166 C367 169 376 174 376 184 C376 194 367 201 354 201 C342 201 333 196 332 186"
+      stroke="#FFFFFF"
+      stroke-width="11"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      fill="none"></path>
+  </svg>
+  {
+    withText && (
+      <span class="font-serif text-xl font-bold tracking-tight text-ink">
+        Budgeteer
+      </span>
+    )
+  }
+</span>

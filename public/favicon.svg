@@ -1,0 +1,33 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Budgeteer">
+  <defs>
+    <linearGradient id="tile" x1="64" y1="48" x2="448" y2="464" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#14B8A6"/>
+      <stop offset="0.55" stop-color="#0D9488"/>
+      <stop offset="1" stop-color="#0F766E"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="80" y1="60" x2="300" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="coin" x1="300" y1="116" x2="408" y2="216" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FDBA74"/>
+      <stop offset="0.5" stop-color="#F97316"/>
+      <stop offset="1" stop-color="#EA580C"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="32" y="32" width="448" height="448" rx="112" fill="url(#tile)"/>
+  <rect x="32" y="32" width="448" height="448" rx="112" fill="url(#sheen)"/>
+
+  <g>
+    <rect x="120" y="288" width="62" height="98"  rx="22" fill="#FFFFFF" fill-opacity="0.55"/>
+    <rect x="200" y="240" width="62" height="146" rx="22" fill="#FFFFFF" fill-opacity="0.78"/>
+    <rect x="280" y="186" width="62" height="200" rx="22" fill="#FFFFFF"/>
+  </g>
+
+  <circle cx="354" cy="166" r="58" fill="url(#coin)"/>
+  <circle cx="354" cy="166" r="58" fill="none" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="3"/>
+  <path d="M354 130 L354 202" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round"/>
+  <path d="M373 147 C373 137 363 132 352 132 C340 132 332 139 332 149 C332 159 341 163 354 166 C367 169 376 174 376 184 C376 194 367 201 354 201 C342 201 333 196 332 186"
+        stroke="#FFFFFF" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

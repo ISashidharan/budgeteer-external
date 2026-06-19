@@ -1,0 +1,128 @@
+---
+import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import { SITE } from "../lib/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Path to a social share image relative to site root. */
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = SITE.description,
+  ogImage = "/og-image.svg",
+  noindex = false,
+} = Astro.props;
+
+const pageTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} — ${SITE.tagline}`;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const ogImageUrl = new URL(ogImage, Astro.site ?? Astro.url).href;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: SITE.name,
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "Web",
+  description: SITE.description,
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#0F766E" />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="min-h-screen">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-teal-600 focus:px-4 focus:py-2 focus:text-white"
+      >Skip to content</a
+    >
+    <Navbar />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Reveal-on-scroll for elements tagged with [data-reveal]. -->
+    <script>
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const els = document.querySelectorAll<HTMLElement>("[data-reveal]");
+      if (reduce || !("IntersectionObserver" in window)) {
+        els.forEach((el) => el.classList.add("revealed"));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const el = entry.target as HTMLElement;
+                const delay = el.dataset.revealDelay;
+                if (delay) el.style.transitionDelay = `${delay}ms`;
+                el.classList.add("revealed");
+                io.unobserve(el);
+              }
+            });
+          },
+          { threshold: 0.12 }
+        );
+        els.forEach((el) => io.observe(el));
+      }
+    </script>
+
+    <style is:global>
+      [data-reveal] {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+          transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      [data-reveal].revealed {
+        opacity: 1;
+        transform: none;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        [data-reveal] {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+    </style>
+  </body>
+</html>

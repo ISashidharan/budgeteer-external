@@ -1,0 +1,32 @@
+---
+/** Accordion FAQ list using native <details> for zero-JS progressive disclosure. */
+interface QA {
+  q: string;
+  a: string;
+}
+interface Props {
+  items: QA[];
+}
+const { items } = Astro.props;
+---
+
+<div class="mx-auto max-w-3xl divide-y divide-ink/10 overflow-hidden rounded-2xl border border-ink/10 bg-cream-paper">
+  {
+    items.map((item) => (
+      <details class="group px-6">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-left font-semibold text-ink [&::-webkit-details-marker]:hidden">
+          {item.q}
+          <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-ink/10 text-ink-soft transition-transform duration-200 group-open:rotate-45">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+          </span>
+        </summary>
+        <p class="pb-5 pr-10 text-[0.95rem] leading-relaxed text-ink-soft">
+          {item.a}
+        </p>
+      </details>
+    ))
+  }
+</div>

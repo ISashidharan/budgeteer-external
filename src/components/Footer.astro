@@ -1,0 +1,72 @@
+---
+import Logo from "./Logo.astro";
+import { SITE, SIGN_IN_URL, SIGN_UP_URL } from "../lib/site";
+
+const year = new Date().getFullYear();
+
+const columns = [
+  {
+    title: "Product",
+    links: [
+      { label: "Features", href: "/features" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Get started", href: SIGN_UP_URL },
+      { label: "Sign in", href: SIGN_IN_URL },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About", href: "/about" },
+      { label: "Contact", href: "/contact" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { label: "Privacy", href: "/privacy" },
+      { label: "Terms", href: "/terms" },
+    ],
+  },
+];
+---
+
+<footer class="mt-24 border-t border-ink/10 bg-cream-paper">
+  <div class="container-page grid gap-10 py-14 md:grid-cols-[1.4fr_repeat(3,1fr)]">
+    <div class="max-w-xs">
+      <Logo size={34} />
+      <p class="mt-4 text-sm leading-relaxed text-ink-soft">
+        {SITE.description}
+      </p>
+    </div>
+    {
+      columns.map((col) => (
+        <div>
+          <h3 class="font-sans text-xs font-bold uppercase tracking-[0.12em] text-ink-soft">
+            {col.title}
+          </h3>
+          <ul class="mt-4 space-y-2.5">
+            {col.links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-sm font-medium text-ink/80 transition-colors hover:text-teal-600"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+  <div class="border-t border-ink/10">
+    <div
+      class="container-page flex flex-col items-center justify-between gap-3 py-6 text-sm text-ink-soft sm:flex-row"
+    >
+      <p>© {year} {SITE.name}. All rights reserved.</p>
+      <p>Built to help you grow your financial wealth.</p>
+    </div>
+  </div>
+</footer>

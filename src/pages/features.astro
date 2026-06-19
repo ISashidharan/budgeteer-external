@@ -1,0 +1,104 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/Section.astro";
+import CtaBand from "../components/CtaBand.astro";
+import BudgetDemo from "../components/demos/BudgetDemo.tsx";
+import AnalyticsDemo from "../components/demos/AnalyticsDemo.tsx";
+import NetWorthDemo from "../components/demos/NetWorthDemo.tsx";
+import { SIGN_UP_URL } from "../lib/site";
+
+export const prerender = true;
+
+const blocks = [
+  {
+    eyebrow: "Transactions",
+    title: "Every transaction, beautifully organized",
+    body: "Import statements via CSV or XLSX from any bank, or add entries by hand. Categorization rules sort the busywork automatically, while a fast, searchable ledger keeps your full history a click away.",
+    points: ["CSV / XLSX statement import", "Smart auto-categorization", "Search, filter & bulk edit", "Multi-account support"],
+    demo: "budget",
+  },
+  {
+    eyebrow: "Budgets & Projections",
+    title: "Budgets that actually keep you on track",
+    body: "Set envelope budgets per category and watch them fill in real time. Projections show where you'll land at month-end, so you can adjust before you overspend — not after.",
+    points: ["Envelope-style budgeting", "Real-time progress bars", "Month-end projections", "Recurring categories"],
+    demo: "budget",
+  },
+  {
+    eyebrow: "Analytics",
+    title: "Turn data into decisions",
+    body: "Rich, interactive charts surface trends across months, break down spending by category, and visualize income against expenses. Understand your money at a glance.",
+    points: ["Spending trend lines", "Category breakdowns", "Cash-flow overview", "Custom date ranges"],
+    demo: "analytics",
+  },
+  {
+    eyebrow: "Loans",
+    title: "Know your true cost of borrowing",
+    body: "Track every loan with a complete amortization schedule. See your payoff date, total interest, and how extra payments accelerate your path to debt-free.",
+    points: ["Full amortization schedules", "Payoff date & interest cost", "Extra-payment scenarios", "Multiple loans at once"],
+    demo: "networth",
+  },
+  {
+    eyebrow: "Net Worth & Assets",
+    title: "Build wealth you can see",
+    body: "Log assets and liabilities to track your net worth over time. The widening gap between what you own and what you owe makes long-term progress tangible and motivating.",
+    points: ["Asset & liability tracking", "Net-worth over time", "Portfolio overview", "Trend insights"],
+    demo: "networth",
+  },
+];
+
+const Demo = { budget: BudgetDemo, analytics: AnalyticsDemo, networth: NetWorthDemo };
+---
+
+<BaseLayout
+  title="Features"
+  description="Transactions, budgets, analytics, loans, net worth and assets — every Budgeteer feature in one calm, beautiful workspace."
+>
+  <section class="bg-hero-glow">
+    <div class="container-page py-16 text-center sm:py-24">
+      <span class="eyebrow" data-reveal>Features</span>
+      <h1 class="mx-auto mt-5 max-w-3xl text-4xl font-bold sm:text-5xl" data-reveal data-reveal-delay="60">
+        One workspace for your entire financial life
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft" data-reveal data-reveal-delay="120">
+        From the first transaction to your long-term net worth, every Budgeteer
+        tool works together — so nothing falls through the cracks.
+      </p>
+    </div>
+  </section>
+
+  {blocks.map((b, i) => {
+    const DemoComp = Demo[b.demo as keyof typeof Demo];
+    const flip = i % 2 === 1;
+    return (
+      <Section align="left" class={i === 0 ? "" : "!pt-0"}>
+        <div class="grid items-center gap-10 lg:grid-cols-2">
+          <div data-reveal class={flip ? "lg:order-2" : ""}>
+            <span class="eyebrow">{b.eyebrow}</span>
+            <h2 class="mt-4 text-3xl font-bold sm:text-4xl">{b.title}</h2>
+            <p class="mt-4 text-lg leading-relaxed text-ink-soft">{b.body}</p>
+            <ul class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {b.points.map((p) => (
+                <li class="flex items-center gap-2.5 font-medium text-ink">
+                  <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-teal-50 text-sm text-teal-600">✓</span>
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div data-reveal data-reveal-delay="100" class={flip ? "lg:order-1" : ""}>
+            <DemoComp client:visible />
+          </div>
+        </div>
+      </Section>
+    );
+  })}
+
+  <Section class="!pt-0 text-center">
+    <div data-reveal>
+      <a href={SIGN_UP_URL} class="btn-primary text-base">Get started free</a>
+    </div>
+  </Section>
+
+  <CtaBand title="Your money, finally in focus" subtitle="Every tool you need to plan, track, and grow — free to start." />
+</BaseLayout>

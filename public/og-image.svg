@@ -1,0 +1,43 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Budgeteer — Plan, track, and grow your money.">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FDF8F2"/>
+      <stop offset="1" stop-color="#F4EFE8"/>
+    </linearGradient>
+    <linearGradient id="tile" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#14B8A6"/>
+      <stop offset="0.55" stop-color="#0D9488"/>
+      <stop offset="1" stop-color="#0F766E"/>
+    </linearGradient>
+    <linearGradient id="coin" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FDBA74"/>
+      <stop offset="0.5" stop-color="#F97316"/>
+      <stop offset="1" stop-color="#EA580C"/>
+    </linearGradient>
+    <linearGradient id="textTeal" x1="80" y1="0" x2="900" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F766E"/>
+      <stop offset="1" stop-color="#14B8A6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="120" cy="60" r="420" fill="#14B8A6" fill-opacity="0.10"/>
+  <circle cx="1120" cy="40" r="360" fill="#F97316" fill-opacity="0.10"/>
+
+  <!-- Logo mark -->
+  <g transform="translate(96, 96)">
+    <rect width="120" height="120" rx="30" fill="url(#tile)"/>
+    <rect x="28" y="68" width="16" height="26" rx="6" fill="#FFFFFF" fill-opacity="0.55"/>
+    <rect x="52" y="54" width="16" height="40" rx="6" fill="#FFFFFF" fill-opacity="0.8"/>
+    <rect x="76" y="40" width="16" height="54" rx="6" fill="#FFFFFF"/>
+    <circle cx="92" cy="34" r="18" fill="url(#coin)"/>
+  </g>
+  <text x="240" y="178" font-family="IBM Plex Serif, serif" font-size="64" font-weight="700" fill="#111827">Budgeteer</text>
+
+  <!-- Headline -->
+  <text x="96" y="356" font-family="IBM Plex Serif, serif" font-size="86" font-weight="700" fill="#111827">Plan, track, and</text>
+  <text x="96" y="452" font-family="IBM Plex Serif, serif" font-size="86" font-weight="700" fill="url(#textTeal)">grow your money.</text>
+
+  <!-- Subhead -->
+  <text x="98" y="528" font-family="Inter, sans-serif" font-size="34" font-weight="500" fill="#5B6474">Transactions, budgets, loans, assets &amp; net worth — all in one place.</text>
+</svg>

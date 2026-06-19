@@ -1,0 +1,41 @@
+---
+/** A page section with consistent vertical rhythm and an optional centered header. */
+interface Props {
+  id?: string;
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  align?: "center" | "left";
+  class?: string;
+}
+const {
+  id,
+  eyebrow,
+  title,
+  subtitle,
+  align = "center",
+  class: className = "",
+} = Astro.props;
+const centered = align === "center";
+---
+
+<section id={id} class={`py-16 sm:py-24 ${className}`}>
+  <div class="container-page">
+    {
+      (eyebrow || title || subtitle) && (
+        <div class={centered ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
+          {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+          {title && (
+            <h2 class="mt-4 text-3xl font-bold sm:text-4xl">{title}</h2>
+          )}
+          {subtitle && (
+            <p class="mt-4 text-lg leading-relaxed text-ink-soft">{subtitle}</p>
+          )}
+        </div>
+      )
+    }
+    <div class={eyebrow || title || subtitle ? "mt-12 sm:mt-16" : ""}>
+      <slot />
+    </div>
+  </div>
+</section>

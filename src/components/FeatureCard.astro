@@ -1,0 +1,37 @@
+---
+/** Compact feature card with an icon, title and description. */
+interface Props {
+  title: string;
+  description: string;
+  /** Inline SVG path data for a 24x24 stroked icon. */
+  icon: string;
+  accent?: "teal" | "coin";
+}
+const { title, description, icon, accent = "teal" } = Astro.props;
+const accentClasses =
+  accent === "coin"
+    ? "from-coin-500/15 to-coin-300/10 text-coin-600"
+    : "from-teal-400/15 to-teal-600/10 text-teal-600";
+---
+
+<div
+  class="card group h-full p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-float"
+>
+  <div
+    class={`inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${accentClasses}`}
+  >
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      set:html={icon}
+    />
+  </div>
+  <h3 class="mt-5 font-serif text-xl font-bold text-ink">{title}</h3>
+  <p class="mt-2 text-[0.95rem] leading-relaxed text-ink-soft">{description}</p>
+</div>

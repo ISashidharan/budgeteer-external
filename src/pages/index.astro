@@ -1,0 +1,180 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/Section.astro";
+import FeatureCard from "../components/FeatureCard.astro";
+import Testimonial from "../components/Testimonial.astro";
+import StatStrip from "../components/StatStrip.astro";
+import FAQ from "../components/FAQ.astro";
+import CtaBand from "../components/CtaBand.astro";
+import HeroDemo from "../components/demos/HeroDemo.tsx";
+import AnalyticsDemo from "../components/demos/AnalyticsDemo.tsx";
+import NetWorthDemo from "../components/demos/NetWorthDemo.tsx";
+import { SIGN_UP_URL } from "../lib/site";
+
+export const prerender = true;
+
+const icons = {
+  transactions:
+    '<rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>',
+  budget:
+    '<path d="M3 3v18h18"/><rect x="7" y="11" width="3" height="7"/><rect x="12" y="7" width="3" height="11"/><rect x="17" y="13" width="3" height="5"/>',
+  analytics:
+    '<path d="M3 3v18h18"/><path d="M19 9l-5 5-4-4-3 3"/>',
+  loans:
+    '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/>',
+  networth:
+    '<path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/>',
+  shield:
+    '<path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/>',
+};
+
+const features = [
+  { icon: icons.transactions, title: "Effortless transactions", description: "Import statements via CSV or XLSX, auto-categorize with rules, and see every dollar move in a clean, searchable ledger.", accent: "teal" },
+  { icon: icons.budget, title: "Budgets that stick", description: "Plan envelope budgets, watch them fill in real time, and project the months ahead so there are no surprises.", accent: "teal" },
+  { icon: icons.analytics, title: "Clear analytics", description: "Beautiful charts reveal spending trends, category breakdowns, and cash-flow patterns at a glance.", accent: "coin" },
+  { icon: icons.loans, title: "Loan tracking", description: "Track every loan with full amortization schedules so you always know your payoff date and interest cost.", accent: "teal" },
+  { icon: icons.networth, title: "Net worth & assets", description: "Log assets and liabilities to watch your net worth climb month over month — your wealth, visualized.", accent: "coin" },
+  { icon: icons.shield, title: "Private & secure", description: "Your finances stay yours. Bank-grade security, no data selling — ever. Light and dark themes included.", accent: "teal" },
+];
+
+const stats = [
+  { value: "$50M+", label: "Tracked by users" },
+  { value: "6", label: "Money tools in one" },
+  { value: "4.9★", label: "Average rating" },
+  { value: "100%", label: "Your data, private" },
+];
+
+const testimonials = [
+  { quote: "I finally see my whole financial life in one place. The net-worth chart climbing every month is weirdly motivating.", name: "Maya R.", role: "Product designer", initials: "MR", accent: "teal" },
+  { quote: "Importing my bank statements took two minutes and the budgets just clicked. It's the first tracker I've actually stuck with.", name: "James T.", role: "Software engineer", initials: "JT", accent: "coin" },
+  { quote: "The loan amortization view alone paid for itself — I refinanced once I saw the real interest cost.", name: "Priya S.", role: "Small business owner", initials: "PS", accent: "teal" },
+];
+
+const faqs = [
+  { q: "Is there a free plan?", a: "Yes. Starter is free forever and covers transaction tracking, a monthly budget, and a net-worth snapshot. Upgrade any time as your needs grow." },
+  { q: "How do I get my data in?", a: "Import CSV or XLSX statements from virtually any bank, or add transactions manually. Smart categorization rules do the tedious sorting for you." },
+  { q: "Can I cancel anytime?", a: "Absolutely. Paid plans are month-to-month (or annual) and you can cancel in a click. Annual plans include a 14-day money-back guarantee." },
+  { q: "Is my financial data secure?", a: "Security is foundational: encrypted in transit and at rest, with strict access controls. We never sell your data." },
+  { q: "Does it work on mobile?", a: "Budgeteer is a responsive web app that works beautifully on phone, tablet, and desktop — with light and dark themes." },
+];
+---
+
+<BaseLayout>
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-hero-glow">
+    <div class="container-page grid items-center gap-12 py-16 lg:grid-cols-2 lg:py-24">
+      <div data-reveal>
+        <span class="eyebrow">Personal finance, beautifully simple</span>
+        <h1 class="mt-5 text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
+          Plan, track, and <span class="text-gradient-teal">grow your money.</span>
+        </h1>
+        <p class="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">
+          Budgeteer brings transactions, budgets, loans, assets, and net worth into
+          one calm, beautiful place — so you can spend intentionally and build real
+          financial wealth.
+        </p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href={SIGN_UP_URL} class="btn-primary text-base">Start free — no card</a>
+          <a href="/features" class="btn-ghost text-base">See how it works</a>
+        </div>
+        <div class="mt-6 flex items-center gap-4 text-sm text-ink-soft">
+          <span class="flex -space-x-2">
+            {["#0F766E", "#14B8A6", "#F97316", "#FDBA74"].map((c) => (
+              <span class="h-7 w-7 rounded-full border-2 border-cream" style={`background:${c}`}></span>
+            ))}
+          </span>
+          <span>Loved by people taking control of their finances</span>
+        </div>
+      </div>
+
+      <div data-reveal data-reveal-delay="120">
+        <HeroDemo client:visible />
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust / stats -->
+  <Section class="!py-12">
+    <div data-reveal>
+      <StatStrip stats={stats} />
+    </div>
+  </Section>
+
+  <!-- Feature grid -->
+  <Section
+    eyebrow="Everything in one place"
+    title="Six money tools, one calm dashboard"
+    subtitle="Stop stitching together spreadsheets and apps. Budgeteer covers your entire financial life end to end."
+  >
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {features.map((f, i) => (
+        <div data-reveal data-reveal-delay={i * 80}>
+          <FeatureCard icon={f.icon} title={f.title} description={f.description} accent={f.accent as "teal" | "coin"} />
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <!-- Deep dive: analytics -->
+  <Section eyebrow="Insight" title="See exactly where your money goes" align="left">
+    <div class="grid items-center gap-10 lg:grid-cols-2">
+      <div data-reveal>
+        <p class="text-lg leading-relaxed text-ink-soft">
+          Interactive charts turn raw transactions into clarity. Spot trends across
+          months, break spending down by category, and catch the leaks before they
+          drain your goals.
+        </p>
+        <ul class="mt-6 space-y-3">
+          {["Monthly spending trends", "Category breakdowns", "Income vs. expense flow", "Custom date ranges"].map((t) => (
+            <li class="flex items-center gap-3 font-medium text-ink">
+              <span class="grid h-6 w-6 place-items-center rounded-full bg-teal-50 text-teal-600">✓</span>
+              {t}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div data-reveal data-reveal-delay="100">
+        <AnalyticsDemo client:visible />
+      </div>
+    </div>
+  </Section>
+
+  <!-- Deep dive: net worth -->
+  <Section align="left" class="!pt-0">
+    <div class="grid items-center gap-10 lg:grid-cols-2">
+      <div data-reveal data-reveal-delay="100" class="lg:order-2">
+        <span class="eyebrow">Wealth</span>
+        <h2 class="mt-4 text-3xl font-bold sm:text-4xl">Watch your net worth grow</h2>
+        <p class="mt-4 text-lg leading-relaxed text-ink-soft">
+          Track assets and liabilities side by side and watch the gap widen in your
+          favor. Budgeteer makes long-term progress visible, so building wealth feels
+          motivating instead of mysterious.
+        </p>
+        <a href={SIGN_UP_URL} class="btn-primary mt-7 inline-flex">Start tracking free</a>
+      </div>
+      <div data-reveal class="lg:order-1">
+        <NetWorthDemo client:visible />
+      </div>
+    </div>
+  </Section>
+
+  <!-- Testimonials -->
+  <Section eyebrow="Loved by savers" title="People are building better money habits">
+    <div class="grid gap-6 lg:grid-cols-3">
+      {testimonials.map((t, i) => (
+        <div data-reveal data-reveal-delay={i * 90}>
+          <Testimonial quote={t.quote} name={t.name} role={t.role} initials={t.initials} accent={t.accent as "teal" | "coin"} />
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <!-- FAQ -->
+  <Section eyebrow="Questions" title="Everything you need to know">
+    <div data-reveal>
+      <FAQ items={faqs} />
+    </div>
+  </Section>
+
+  <CtaBand />
+</BaseLayout>

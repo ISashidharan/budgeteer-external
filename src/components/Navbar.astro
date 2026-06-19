@@ -1,0 +1,91 @@
+---
+import Logo from "./Logo.astro";
+import { NAV_LINKS, SIGN_IN_URL, SIGN_UP_URL } from "../lib/site";
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === "/" ? path === "/" : path.startsWith(href);
+---
+
+<header
+  id="site-header"
+  class="sticky top-0 z-50 border-b border-ink/5 bg-cream/80 backdrop-blur-md transition-shadow"
+>
+  <nav class="container-page flex h-16 items-center justify-between gap-4">
+    <a href="/" class="flex items-center" aria-label="Budgeteer home">
+      <Logo size={32} />
+    </a>
+
+    <div class="hidden items-center gap-1 md:flex">
+      {
+        NAV_LINKS.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "rounded-full px-4 py-2 text-sm font-semibold transition-colors",
+              isActive(link.href)
+                ? "text-teal-600"
+                : "text-ink-soft hover:text-ink",
+            ]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="flex items-center gap-2">
+      <a
+        href={SIGN_IN_URL}
+        class="hidden rounded-full px-4 py-2 text-sm font-semibold text-ink-soft transition-colors hover:text-ink sm:inline-flex"
+        >Sign in</a
+      >
+      <a href={SIGN_UP_URL} class="btn-primary text-sm">Get started</a>
+      <button
+        id="mobile-menu-btn"
+        class="inline-flex items-center justify-center rounded-full p-2 text-ink md:hidden"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden border-t border-ink/5 bg-cream-paper md:hidden">
+    <div class="container-page flex flex-col gap-1 py-4">
+      {
+        NAV_LINKS.map((link) => (
+          <a
+            href={link.href}
+            class="rounded-xl px-4 py-3 text-base font-semibold text-ink-soft hover:bg-teal-50 hover:text-teal-600"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a href={SIGN_IN_URL} class="rounded-xl px-4 py-3 text-base font-semibold text-ink-soft hover:bg-teal-50 hover:text-teal-600">Sign in</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  btn?.addEventListener("click", () => {
+    const open = menu?.classList.toggle("hidden");
+    btn.setAttribute("aria-expanded", String(!open));
+  });
+
+  // Subtle shadow once the page is scrolled.
+  const header = document.getElementById("site-header");
+  const onScroll = () =>
+    header?.classList.toggle("shadow-card", window.scrollY > 8);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+</script>

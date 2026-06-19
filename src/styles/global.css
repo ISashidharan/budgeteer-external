@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Serif:wght@500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    /* Fluid root size mirrors the Budgeteer app for a seamless brand feel. */
+    font-size: clamp(1rem, 0.95rem + 0.35vw, 1.18rem);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+    background-image: radial-gradient(
+        circle at 18% -10%,
+        rgba(20, 184, 166, 0.1),
+        transparent 42%
+      ),
+      radial-gradient(circle at 90% -5%, rgba(249, 115, 22, 0.1), transparent 46%);
+    background-attachment: fixed;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif text-ink;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: rgba(20, 184, 166, 0.22);
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  .btn {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold tracking-wide transition-all duration-150;
+  }
+
+  .btn-primary {
+    @apply btn text-white shadow-glow;
+    background-image: linear-gradient(
+      120deg,
+      #0f766e 0%,
+      #0d9488 55%,
+      #14b8a6 100%
+    );
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 34px rgba(13, 148, 136, 0.38);
+  }
+
+  .btn-secondary {
+    @apply btn text-white;
+    background-image: linear-gradient(
+      120deg,
+      #ea580c 0%,
+      #f97316 60%,
+      #fdba74 100%
+    );
+    box-shadow: 0 10px 18px rgba(249, 115, 22, 0.22);
+  }
+  .btn-secondary:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    @apply btn border border-ink/15 bg-white/70 text-ink backdrop-blur;
+  }
+  .btn-ghost:hover {
+    @apply border-ink/25 bg-white;
+  }
+
+  .card {
+    @apply rounded-2xl border border-ink/10 bg-cream-paper shadow-card;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-teal-600/20 bg-teal-50 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-teal-600;
+  }
+
+  .text-gradient-teal {
+    background-image: linear-gradient(120deg, #0f766e, #0d9488 55%, #14b8a6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* Respect users who prefer reduced motion across all decorative animation. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
