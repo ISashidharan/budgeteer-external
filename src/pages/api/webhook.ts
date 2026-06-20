@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import type Stripe from "stripe";
-import { stripe } from "../../lib/stripe";
+import { getStripe } from "../../lib/stripe";
 
 export const prerender = false;
 
@@ -21,7 +21,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   let event: Stripe.Event;
   try {
-    event = stripe.webhooks.constructEvent(payload, signature, secret);
+    event = getStripe().webhooks.constructEvent(payload, signature, secret);
   } catch (err) {
     const message = err instanceof Error ? err.message : "Invalid signature";
     console.error("[stripe] webhook verification failed:", message);

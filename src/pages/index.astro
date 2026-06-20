@@ -2,8 +2,6 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/Section.astro";
 import FeatureCard from "../components/FeatureCard.astro";
-import Testimonial from "../components/Testimonial.astro";
-import StatStrip from "../components/StatStrip.astro";
 import FAQ from "../components/FAQ.astro";
 import CtaBand from "../components/CtaBand.astro";
 import HeroDemo from "../components/demos/HeroDemo.tsx";
@@ -37,19 +35,6 @@ const features = [
   { icon: icons.shield, title: "Private & secure", description: "Your finances stay yours. Bank-grade security, no data selling — ever. Light and dark themes included.", accent: "teal" },
 ];
 
-const stats = [
-  { value: "$50M+", label: "Tracked by users" },
-  { value: "6", label: "Money tools in one" },
-  { value: "4.9★", label: "Average rating" },
-  { value: "100%", label: "Your data, private" },
-];
-
-const testimonials = [
-  { quote: "I finally see my whole financial life in one place. The net-worth chart climbing every month is weirdly motivating.", name: "Maya R.", role: "Product designer", initials: "MR", accent: "teal" },
-  { quote: "Importing my bank statements took two minutes and the budgets just clicked. It's the first tracker I've actually stuck with.", name: "James T.", role: "Software engineer", initials: "JT", accent: "coin" },
-  { quote: "The loan amortization view alone paid for itself — I refinanced once I saw the real interest cost.", name: "Priya S.", role: "Small business owner", initials: "PS", accent: "teal" },
-];
-
 const faqs = [
   { q: "Is there a free plan?", a: "Yes. Starter is free forever and covers transaction tracking, a monthly budget, and a net-worth snapshot. Upgrade any time as your needs grow." },
   { q: "How do I get my data in?", a: "Import CSV or XLSX statements from virtually any bank, or add transactions manually. Smart categorization rules do the tedious sorting for you." },
@@ -77,13 +62,16 @@ const faqs = [
           <a href={SIGN_UP_URL} class="btn-primary text-base">Start free — no card</a>
           <a href="/features" class="btn-ghost text-base">See how it works</a>
         </div>
-        <div class="mt-6 flex items-center gap-4 text-sm text-ink-soft">
-          <span class="flex -space-x-2">
-            {["#0F766E", "#14B8A6", "#F97316", "#FDBA74"].map((c) => (
-              <span class="h-7 w-7 rounded-full border-2 border-cream" style={`background:${c}`}></span>
-            ))}
+        <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium text-ink-soft">
+          <span class="flex items-center gap-2">
+            <span class="text-teal-600">✓</span> Free forever plan
           </span>
-          <span>Loved by people taking control of their finances</span>
+          <span class="flex items-center gap-2">
+            <span class="text-teal-600">✓</span> No credit card required
+          </span>
+          <span class="flex items-center gap-2">
+            <span class="text-teal-600">✓</span> Light &amp; dark mode
+          </span>
         </div>
       </div>
 
@@ -92,13 +80,6 @@ const faqs = [
       </div>
     </div>
   </section>
-
-  <!-- Trust / stats -->
-  <Section class="!py-12">
-    <div data-reveal>
-      <StatStrip stats={stats} />
-    </div>
-  </Section>
 
   <!-- Feature grid -->
   <Section
@@ -155,17 +136,6 @@ const faqs = [
       <div data-reveal class="lg:order-1">
         <NetWorthDemo client:visible />
       </div>
-    </div>
-  </Section>
-
-  <!-- Testimonials -->
-  <Section eyebrow="Loved by savers" title="People are building better money habits">
-    <div class="grid gap-6 lg:grid-cols-3">
-      {testimonials.map((t, i) => (
-        <div data-reveal data-reveal-delay={i * 90}>
-          <Testimonial quote={t.quote} name={t.name} role={t.role} initials={t.initials} accent={t.accent as "teal" | "coin"} />
-        </div>
-      ))}
     </div>
   </Section>
 

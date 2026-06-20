@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+export const prerender = true;
+---
+
+<BaseLayout title="Checkout canceled" description="Your checkout was canceled — no charge was made." noindex={true}>
+  <section class="container-page flex min-h-[70vh] max-w-2xl flex-col items-center justify-center py-20 text-center">
+    <div class="grid h-20 w-20 place-items-center rounded-full border border-ink/10 bg-cream-paper text-ink-soft shadow-card">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="15" y1="9" x2="9" y2="15"></line>
+        <line x1="9" y1="9" x2="15" y2="15"></line>
+      </svg>
+    </div>
+
+    <h1 class="mt-8 text-4xl font-bold sm:text-5xl">Checkout canceled</h1>
+    <p class="mt-4 text-lg leading-relaxed text-ink-soft">
+      No worries — you weren't charged. Whenever you're ready, your plan will be
+      right here waiting.
+    </p>
+
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <a href="/pricing" class="btn-primary">Back to pricing</a>
+      <a href="/" class="btn-ghost">Return home</a>
+    </div>
+  </section>
+</BaseLayout>

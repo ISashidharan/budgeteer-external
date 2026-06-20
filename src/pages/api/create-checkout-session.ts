@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { stripe } from "../../lib/stripe";
+import { getStripe, isStripeConfigured } from "../../lib/stripe";
 
 export const prerender = false;
 
@@ -8,7 +8,7 @@ export const prerender = false;
  * returns its hosted URL. The client redirects the browser to that URL.
  */
 export const POST: APIRoute = async ({ request, url }) => {
-  if (!import.meta.env.STRIPE_SECRET_KEY) {
+  if (!isStripeConfigured()) {
     return json({ error: "Stripe is not configured on the server." }, 500);
   }
 
@@ -27,6 +27,7 @@ export const POST: APIRoute = async ({ request, url }) => {
   const origin = url.origin;
 
   try {
+    const stripe = getStripe();
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
       line_items: [{ price: priceId, quantity: 1 }],

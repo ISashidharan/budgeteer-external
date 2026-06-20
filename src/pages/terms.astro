@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../lib/site";
+
+export const prerender = true;
+const updated = "June 19, 2026";
+
+const sections = [
+  { h: "Acceptance of terms", p: ["By creating a Budgeteer account or using the service, you agree to these Terms. If you don't agree, please don't use Budgeteer."] },
+  { h: "Your account", p: ["You're responsible for keeping your login credentials secure and for the activity on your account. Provide accurate information and notify us of any unauthorized use."] },
+  { h: "Subscriptions & billing", p: ["Paid plans are billed in advance on a monthly or annual basis through Stripe. Plans renew automatically until canceled. You can cancel anytime and retain access through the end of your billing period.", "Annual plans include a 14-day money-back guarantee from the date of purchase."] },
+  { h: "Acceptable use", p: ["Use Budgeteer lawfully. Don't attempt to disrupt the service, access other users' data, or reverse-engineer the platform."] },
+  { h: "Not financial advice", p: ["Budgeteer provides tools to organize and visualize your finances. It does not provide financial, investment, tax, or legal advice. Decisions you make are your own."] },
+  { h: "Availability & changes", p: ["We work hard to keep Budgeteer available and reliable, but we don't guarantee uninterrupted service. We may update features, and we'll give reasonable notice of material changes to these Terms."] },
+  { h: "Limitation of liability", p: ["To the maximum extent permitted by law, Budgeteer is provided \"as is\" and we are not liable for indirect or consequential damages arising from your use of the service."] },
+  { h: "Contact", p: [`Questions about these Terms? Email us at ${SITE.email}.`] },
+];
+---
+
+<BaseLayout title="Terms of Service" description="The terms governing your use of Budgeteer." noindex={true}>
+  <section class="container-page max-w-3xl py-16 sm:py-20">
+    <h1 class="text-4xl font-bold sm:text-5xl">Terms of Service</h1>
+    <p class="mt-3 text-sm text-ink-soft">Last updated: {updated}</p>
+    <div class="mt-10 space-y-8">
+      {sections.map((s) => (
+        <section>
+          <h2 class="text-xl font-bold text-ink">{s.h}</h2>
+          {s.p.map((para) => (
+            <p class="mt-3 leading-relaxed text-ink-soft">{para}</p>
+          ))}
+        </section>
+      ))}
+    </div>
+    <p class="mt-12 rounded-xl border border-ink/10 bg-cream-paper p-5 text-sm leading-relaxed text-ink-soft">
+      This page is a starting template and not legal advice. Have it reviewed by a
+      qualified professional before launch.
+    </p>
+  </section>
+</BaseLayout>

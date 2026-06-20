@@ -1,0 +1,70 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/Section.astro";
+import { SITE } from "../lib/site";
+
+export const prerender = true;
+
+const channels = [
+  { title: "Email us", body: SITE.email, href: `mailto:${SITE.email}`, icon: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>' },
+  { title: "Help center", body: "Guides, tips & answers", href: "#", icon: '<circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 1 1 4.6 3.5c-.8.6-1.7 1-1.7 2"/><line x1="12" y1="17" x2="12" y2="17"/>' },
+  { title: "Status", body: "All systems operational", href: "#", icon: '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>' },
+];
+---
+
+<BaseLayout
+  title="Contact"
+  description="Questions about Budgeteer? We'd love to hear from you."
+>
+  <section class="bg-hero-glow">
+    <div class="container-page py-16 text-center sm:py-20">
+      <span class="eyebrow" data-reveal>Contact</span>
+      <h1 class="mx-auto mt-5 max-w-2xl text-4xl font-bold sm:text-5xl" data-reveal data-reveal-delay="60">
+        We'd love to hear from you
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-ink-soft" data-reveal data-reveal-delay="120">
+        Questions, feedback, or partnership ideas — reach out and a real human will
+        get back to you.
+      </p>
+    </div>
+  </section>
+
+  <Section class="!pt-10">
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.2fr]">
+      <!-- Channels -->
+      <div class="space-y-4" data-reveal>
+        {channels.map((c) => (
+          <a href={c.href} class="card flex items-center gap-4 p-5 transition-all hover:-translate-y-0.5 hover:shadow-float">
+            <span class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-teal-400/15 to-teal-600/10 text-teal-600">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={c.icon} />
+            </span>
+            <span>
+              <span class="block font-semibold text-ink">{c.title}</span>
+              <span class="block text-sm text-ink-soft">{c.body}</span>
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <!-- Form -->
+      <form class="card p-7" data-reveal data-reveal-delay="100" name="contact" method="POST" action={`mailto:${SITE.email}`} enctype="text/plain">
+        <div class="grid gap-5 sm:grid-cols-2">
+          <label class="block">
+            <span class="mb-1.5 block text-sm font-semibold text-ink">Name</span>
+            <input name="name" required class="w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-ink outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20" placeholder="Your name" />
+          </label>
+          <label class="block">
+            <span class="mb-1.5 block text-sm font-semibold text-ink">Email</span>
+            <input type="email" name="email" required class="w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-ink outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20" placeholder="you@example.com" />
+          </label>
+        </div>
+        <label class="mt-5 block">
+          <span class="mb-1.5 block text-sm font-semibold text-ink">Message</span>
+          <textarea name="message" required rows="5" class="w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-ink outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20" placeholder="How can we help?"></textarea>
+        </label>
+        <button type="submit" class="btn-primary mt-6 w-full sm:w-auto">Send message</button>
+        <p class="mt-3 text-xs text-ink-soft">We typically reply within one business day.</p>
+      </form>
+    </div>
+  </Section>
+</BaseLayout>

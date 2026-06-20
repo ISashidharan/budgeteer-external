@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/Section.astro";
+import FAQ from "../components/FAQ.astro";
+import CtaBand from "../components/CtaBand.astro";
+import PricingCards from "../components/PricingCards.tsx";
+
+export const prerender = true;
+
+const faqs = [
+  { q: "Can I switch plans later?", a: "Yes — upgrade or downgrade anytime from your account. Changes are prorated automatically." },
+  { q: "What payment methods do you accept?", a: "All major credit and debit cards via Stripe, our secure payments processor. We never see or store your card details." },
+  { q: "Is the free plan really free?", a: "Forever. Starter has no time limit and requires no card. Upgrade only when you want the advanced tools." },
+  { q: "Do you offer refunds?", a: "Annual plans come with a 14-day money-back guarantee. If Budgeteer isn't for you, email us within 14 days for a full refund." },
+  { q: "Can I cancel anytime?", a: "Of course. Cancel in a single click — you'll keep access until the end of your billing period." },
+];
+
+const compare = [
+  { feature: "Connected accounts", free: "2", pro: "Unlimited", auto: "Unlimited", ai: "Unlimited" },
+  { feature: "Budgets", free: "1", pro: "Unlimited", auto: "Unlimited", ai: "Unlimited" },
+  { feature: "CSV / XLSX import", free: "—", pro: "✓", auto: "✓", ai: "✓" },
+  { feature: "Analytics & trends", free: "Basic", pro: "Full", auto: "Full", ai: "Advanced" },
+  { feature: "Loan tracking", free: "—", pro: "✓", auto: "✓", ai: "✓" },
+  { feature: "Budget projections", free: "—", pro: "✓", auto: "✓", ai: "✓" },
+  { feature: "Automatic imports & sync", free: "—", pro: "—", auto: "✓", ai: "✓" },
+  { feature: "Auto-categorization rules", free: "—", pro: "—", auto: "✓", ai: "✓" },
+  { feature: "Asset / portfolio tracking", free: "Snapshot", pro: "Snapshot", auto: "✓", ai: "✓" },
+  { feature: "AI insights & coaching", free: "—", pro: "—", auto: "—", ai: "✓" },
+  { feature: "Net-worth forecasting", free: "—", pro: "—", auto: "—", ai: "✓" },
+  { feature: "Priority support", free: "—", pro: "—", auto: "—", ai: "✓" },
+];
+---
+
+<BaseLayout
+  title="Pricing"
+  description="Simple, honest pricing. Start free, upgrade when you're ready. No hidden fees — cancel anytime."
+>
+  <section class="bg-hero-glow">
+    <div class="container-page py-16 text-center sm:py-20">
+      <span class="eyebrow" data-reveal>Pricing</span>
+      <h1 class="mx-auto mt-5 max-w-2xl text-4xl font-bold sm:text-5xl" data-reveal data-reveal-delay="60">
+        Simple pricing that grows with you
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-ink-soft" data-reveal data-reveal-delay="120">
+        Start free, forever. Upgrade only when you want the advanced tools — and
+        cancel anytime.
+      </p>
+    </div>
+  </section>
+
+  <Section class="!pt-4">
+    <PricingCards client:load />
+  </Section>
+
+  <!-- Comparison table -->
+  <Section eyebrow="Compare" title="Every plan, side by side">
+    <div class="overflow-x-auto" data-reveal>
+      <table class="w-full min-w-[720px] overflow-hidden rounded-2xl border border-ink/10 bg-cream-paper text-left text-sm">
+        <thead>
+          <tr class="border-b border-ink/10 bg-ink/[0.02]">
+            <th class="px-5 py-4 font-bold text-ink">Feature</th>
+            <th class="px-5 py-4 font-bold text-ink">Free</th>
+            <th class="px-5 py-4 font-bold text-ink">Pro</th>
+            <th class="px-5 py-4 font-bold text-teal-600">Auto</th>
+            <th class="px-5 py-4 font-bold text-ink">AI</th>
+          </tr>
+        </thead>
+        <tbody>
+          {compare.map((row) => (
+            <tr class="border-b border-ink/5 last:border-0">
+              <td class="px-5 py-3.5 font-semibold text-ink">{row.feature}</td>
+              <td class="px-5 py-3.5 text-ink-soft">{row.free}</td>
+              <td class="px-5 py-3.5 text-ink-soft">{row.pro}</td>
+              <td class="px-5 py-3.5 font-medium text-ink">{row.auto}</td>
+              <td class="px-5 py-3.5 text-ink-soft">{row.ai}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </Section>
+
+  <Section eyebrow="Questions" title="Pricing FAQ" class="!pt-0">
+    <div data-reveal>
+      <FAQ items={faqs} />
+    </div>
+  </Section>
+
+  <CtaBand title="Try Budgeteer free today" subtitle="No card required. Upgrade only when you're ready." />
+</BaseLayout>

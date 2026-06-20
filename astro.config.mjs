@@ -3,7 +3,7 @@ import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
-import node from "@astrojs/node";
+import vercel from "@astrojs/vercel";
 
 // Public site URL — used for canonical links, sitemap and Open Graph tags.
 // Override via the SITE_URL env var in production.
@@ -13,8 +13,8 @@ const SITE_URL = process.env.SITE_URL || "https://budgeteer.app";
 export default defineConfig({
   site: SITE_URL,
   // Marketing pages are prerendered (see `export const prerender = true`),
-  // while the Stripe API routes run on-demand on the Node server.
+  // while the Stripe API routes run on-demand as Vercel serverless functions.
   output: "server",
-  adapter: node({ mode: "standalone" }),
+  adapter: vercel(),
   integrations: [tailwind(), react(), sitemap()],
 });

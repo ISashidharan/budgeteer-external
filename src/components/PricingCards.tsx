@@ -60,12 +60,22 @@ export default function PricingCards() {
     }
   }
 
+  const fmt = (n: number) =>
+    Number.isInteger(n) ? `$${n}` : `$${n.toFixed(2)}`;
+
+  // Big headline number: monthly rate, or the per-month equivalent when annual.
+  const headlineMonthly = (plan: Plan) => {
+    if (plan.free) return "$0";
+    const p = plan.prices[period];
+    return period === "yearly" ? fmt(p.amount / 12) : fmt(p.amount);
+  };
+
   const yearlyHint = (plan: Plan) => {
     const m = plan.prices.monthly.amount;
     const y = plan.prices.yearly.amount;
     if (!m || !y) return null;
     const saved = m * 12 - y;
-    return saved > 0 ? `Save ${"$"}${saved}/yr` : null;
+    return saved > 0 ? `Save ${fmt(saved)}/yr` : null;
   };
 
   return (
@@ -104,43 +114,42 @@ export default function PricingCards() {
         </div>
       )}
 
-      <div className="grid items-stretch gap-6 lg:grid-cols-3">
+      <div className="grid items-stretch gap-5 md:grid-cols-2 lg:grid-cols-4">
         {PLANS.map((plan) => {
           const price = plan.prices[period];
           const featured = plan.featured;
           return (
             <div
               key={plan.id}
-              className={`relative flex flex-col rounded-3xl border p-7 ${
+              className={`relative flex flex-col rounded-3xl border p-6 ${
                 featured
-                  ? "border-teal-500/40 bg-cream-paper shadow-float ring-2 ring-teal-500/30 lg:-mt-4 lg:mb-4"
+                  ? "border-teal-500/40 bg-cream-paper shadow-float ring-2 ring-teal-500/30"
                   : "border-ink/10 bg-cream-paper shadow-card"
               }`}
             >
               {featured && (
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-orange px-3 py-1 text-xs font-bold uppercase tracking-wide text-white shadow">
-                  Most popular
+                  Recommended
                 </span>
               )}
               <h3 className="font-serif text-2xl font-bold text-ink">
                 {plan.name}
               </h3>
-              <p className="mt-1.5 min-h-[2.75rem] text-sm leading-relaxed text-ink-soft">
+              <p className="mt-1.5 min-h-[3.5rem] text-sm leading-relaxed text-ink-soft">
                 {plan.tagline}
               </p>
 
               <div className="mt-5 flex items-end gap-1.5">
                 <span className="font-serif text-4xl font-bold text-ink">
-                  ${period === "monthly" ? price.amount : Math.round(price.amount / 12)}
+                  {headlineMonthly(plan)}
                 </span>
                 <span className="mb-1.5 text-sm font-medium text-ink-soft">
                   {plan.free ? "forever" : "/mo"}
                 </span>
               </div>
               <div className="mt-1 h-4 text-xs font-semibold text-coin-600">
-                {period === "yearly" ? yearlyHint(plan) : ""}
                 {period === "yearly" && !plan.free && price.amount
-                  ? ` · billed $${price.amount}/yr`
+                  ? `billed ${fmt(price.amount)}/yr · ${yearlyHint(plan)}`
                   : ""}
               </div>
 

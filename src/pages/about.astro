@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/Section.astro";
+import CtaBand from "../components/CtaBand.astro";
+
+export const prerender = true;
+
+const values = [
+  { title: "Clarity over clutter", body: "Money is stressful enough. Budgeteer is calm, focused, and free of noise — so the next right step is always obvious." },
+  { title: "Your data is yours", body: "We don't sell data or run ads. Your financial life is private, encrypted, and fully under your control." },
+  { title: "Built for the long game", body: "Quick wins are nice, but real wealth compounds. Every feature is designed to keep you progressing for years." },
+  { title: "Honest by default", body: "Transparent pricing, a genuinely free tier, and no dark patterns. We earn trust the slow, durable way." },
+];
+
+---
+
+<BaseLayout
+  title="About"
+  description="Budgeteer exists to help everyday people plan intentionally and build lasting financial wealth."
+>
+  <section class="bg-hero-glow">
+    <div class="container-page py-16 text-center sm:py-24">
+      <span class="eyebrow" data-reveal>Our mission</span>
+      <h1 class="mx-auto mt-5 max-w-3xl text-4xl font-bold sm:text-5xl" data-reveal data-reveal-delay="60">
+        Helping everyone build <span class="text-gradient-teal">financial wealth</span>
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft" data-reveal data-reveal-delay="120">
+        We believe financial wellbeing shouldn't require a spreadsheet wizard or a
+        wealth manager. Budgeteer puts powerful, professional-grade money tools in
+        everyone's hands — in one calm, beautiful place.
+      </p>
+    </div>
+  </section>
+
+  <Section align="left" eyebrow="Why we built it" title="Personal finance, minus the friction">
+    <div class="grid gap-8 lg:grid-cols-2" data-reveal>
+      <p class="text-lg leading-relaxed text-ink-soft">
+        Most people juggle a banking app, a spreadsheet, a loan calculator, and a
+        vague sense of how much they're worth. The full picture lives in pieces —
+        and the pieces never quite add up.
+      </p>
+      <p class="text-lg leading-relaxed text-ink-soft">
+        Budgeteer brings transactions, budgets, analytics, loans, assets, and net
+        worth together so you can see the whole story. When the picture is clear,
+        good decisions get easy — and wealth follows.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="What we value" title="The principles behind every decision">
+    <div class="grid gap-6 sm:grid-cols-2">
+      {values.map((v, i) => (
+        <div class="card p-7" data-reveal data-reveal-delay={i * 80}>
+          <h3 class="font-serif text-xl font-bold text-ink">{v.title}</h3>
+          <p class="mt-2 leading-relaxed text-ink-soft">{v.body}</p>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <CtaBand />
+</BaseLayout>

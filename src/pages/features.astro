@@ -47,7 +47,6 @@ const blocks = [
   },
 ];
 
-const Demo = { budget: BudgetDemo, analytics: AnalyticsDemo, networth: NetWorthDemo };
 ---
 
 <BaseLayout
@@ -68,7 +67,6 @@ const Demo = { budget: BudgetDemo, analytics: AnalyticsDemo, networth: NetWorthD
   </section>
 
   {blocks.map((b, i) => {
-    const DemoComp = Demo[b.demo as keyof typeof Demo];
     const flip = i % 2 === 1;
     return (
       <Section align="left" class={i === 0 ? "" : "!pt-0"}>
@@ -87,7 +85,9 @@ const Demo = { budget: BudgetDemo, analytics: AnalyticsDemo, networth: NetWorthD
             </ul>
           </div>
           <div data-reveal data-reveal-delay="100" class={flip ? "lg:order-1" : ""}>
-            <DemoComp client:visible />
+            {b.demo === "budget" && <BudgetDemo client:visible />}
+            {b.demo === "analytics" && <AnalyticsDemo client:visible />}
+            {b.demo === "networth" && <NetWorthDemo client:visible />}
           </div>
         </div>
       </Section>
