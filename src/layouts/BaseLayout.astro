@@ -46,6 +46,25 @@ const jsonLd = {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#0F766E" />
     <link rel="canonical" href={canonical} />
+
+    <!-- Resolve the theme before first paint to avoid a flash of the wrong
+         colours. Uses the saved choice, falling back to the OS preference. -->
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var dark =
+            stored === "dark" ||
+            (stored !== "light" &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches);
+          if (dark) {
+            document.documentElement.classList.add("dark");
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute("content", "#09120F");
+          }
+        } catch (e) {}
+      })();
+    </script>
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <title>{pageTitle}</title>

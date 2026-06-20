@@ -51,7 +51,7 @@ export default function HeroDemo() {
     <div ref={ref} className="select-none" aria-hidden="true">
       <div className="overflow-hidden rounded-2xl border border-ink/10 bg-cream-paper shadow-float">
         {/* Window chrome */}
-        <div className="flex items-center gap-2 border-b border-ink/10 bg-white/60 px-4 py-3">
+        <div className="flex items-center gap-2 border-b border-ink/10 bg-white/60 px-4 py-3 dark:bg-white/[0.04]">
           <span className="h-3 w-3 rounded-full bg-[#EF4444]/70" />
           <span className="h-3 w-3 rounded-full bg-[#F59E0B]/70" />
           <span className="h-3 w-3 rounded-full bg-[#10B981]/70" />
@@ -102,7 +102,7 @@ export default function HeroDemo() {
             </div>
 
             {/* Net worth chart */}
-            <div className="rounded-xl border border-ink/10 bg-white/70 p-4">
+            <div className="rounded-xl border border-ink/10 bg-white/70 dark:bg-white/5 p-4">
               <div className="mb-2 flex items-center justify-between">
                 <span className="text-sm font-bold text-ink">Net worth</span>
                 <span className="rounded-full bg-teal-50 px-2 py-0.5 text-xs font-semibold text-teal-600">
@@ -135,7 +135,7 @@ export default function HeroDemo() {
 
             {/* Budgets + transactions */}
             <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
-              <div className="rounded-xl border border-ink/10 bg-white/70 p-4">
+              <div className="rounded-xl border border-ink/10 bg-white/70 dark:bg-white/5 p-4">
                 <span className="text-sm font-bold text-ink">Budgets</span>
                 <div className="mt-3 space-y-3">
                   {budgets.map((b, i) => {
@@ -167,7 +167,7 @@ export default function HeroDemo() {
                 </div>
               </div>
 
-              <div className="rounded-xl border border-ink/10 bg-white/70 p-4">
+              <div className="rounded-xl border border-ink/10 bg-white/70 dark:bg-white/5 p-4">
                 <span className="text-sm font-bold text-ink">Recent activity</span>
                 <div className="mt-2 space-y-1.5">
                   {transactions.map((t, i) => (
@@ -240,7 +240,7 @@ function StatCard({
   down?: boolean;
 }) {
   return (
-    <div className="rounded-xl border border-ink/10 bg-white/70 p-3">
+    <div className="rounded-xl border border-ink/10 bg-white/70 dark:bg-white/5 p-3">
       <div className="text-[0.65rem] font-semibold uppercase tracking-wide text-ink-soft">
         {label}
       </div>
