@@ -1,0 +1,89 @@
+---
+/**
+ * Light / dark theme toggle.
+ *
+ * The initial theme is resolved before paint by the inline script in
+ * BaseLayout (system preference by default, or the user's saved choice).
+ * This component renders the toggle button(s); the script below wires every
+ * `[data-theme-toggle]` on the page and keeps them in sync.
+ *
+ * `variant="icon"`  → compact icon button (navbar).
+ * `variant="menu"`  → full-width row (mobile menu).
+ */
+interface Props {
+  variant?: "icon" | "menu";
+  class?: string;
+}
+const { variant = "icon", class: className = "" } = Astro.props;
+
+const sun = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>`;
+const moon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+---
+
+{
+  variant === "icon" ? (
+    <button
+      type="button"
+      data-theme-toggle
+      class:list={[
+        "inline-flex h-10 w-10 items-center justify-center rounded-full border border-ink/10 text-ink-soft transition-colors hover:bg-ink/5 hover:text-ink",
+        className,
+      ]}
+      aria-label="Toggle dark mode"
+      title="Toggle theme"
+    >
+      <span class="dark:hidden" set:html={moon} />
+      <span class="hidden dark:inline" set:html={sun} />
+    </button>
+  ) : (
+    <button
+      type="button"
+      data-theme-toggle
+      class:list={[
+        "flex items-center justify-between rounded-xl px-4 py-3 text-base font-semibold text-ink-soft hover:bg-teal-50 hover:text-teal-600",
+        className,
+      ]}
+      aria-label="Toggle dark mode"
+    >
+      <span class="dark:hidden">Dark mode</span>
+      <span class="hidden dark:inline">Light mode</span>
+      <span class="dark:hidden" set:html={moon} />
+      <span class="hidden dark:inline" set:html={sun} />
+    </button>
+  )
+}
+
+<script>
+  // Apply a theme and remember the explicit choice.
+  function setTheme(theme: "light" | "dark") {
+    const root = document.documentElement;
+    // Enable transitions only during the swap to avoid a flash on load.
+    root.classList.add("theme-transition");
+    root.classList.toggle("dark", theme === "dark");
+    try {
+      localStorage.setItem("theme", theme);
+    } catch {}
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", theme === "dark" ? "#09120F" : "#0F766E");
+    window.setTimeout(() => root.classList.remove("theme-transition"), 320);
+  }
+
+  document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      setTheme(isDark ? "light" : "dark");
+    });
+  });
+
+  // Follow the OS while the user hasn't picked a theme explicitly.
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+  media.addEventListener?.("change", (e) => {
+    let stored: string | null = null;
+    try {
+      stored = localStorage.getItem("theme");
+    } catch {}
+    if (stored !== "light" && stored !== "dark") {
+      document.documentElement.classList.toggle("dark", e.matches);
+    }
+  });
+</script>

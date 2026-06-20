@@ -1,13 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,ts,tsx,md,mdx}"],
+  // Dark mode is opt-in via a `.dark` class on <html>, set by the inline theme
+  // script in BaseLayout (system preference by default, with a manual toggle).
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
-        // Brand teal ramp (mirrors budgeteer/client/src/theme.js)
+        // Brand teal ramp (mirrors budgeteer/client/src/theme.js).
+        // `50`/`100` are soft tint surfaces and flip in dark mode, so they are
+        // driven by CSS variables (see global.css); the rest are fixed brand hues.
         teal: {
-          50: "#ECFDF8",
-          100: "#CFFAEF",
+          50: "rgb(var(--c-teal-50) / <alpha-value>)",
+          100: "rgb(var(--c-teal-100) / <alpha-value>)",
           200: "#99F6E0",
           300: "#5EEAD4",
           400: "#14B8A6",
@@ -26,15 +31,17 @@ export default {
           600: "#EA580C",
           700: "#C2410C",
         },
-        // Warm surfaces
+        // Warm surfaces — variable-driven so they invert to deep teal-charcoal
+        // tones in dark mode without touching markup.
         cream: {
-          DEFAULT: "#F6F3EF",
-          paper: "#FFFBF5",
-          deep: "#F4EFE8",
+          DEFAULT: "rgb(var(--c-surface) / <alpha-value>)",
+          paper: "rgb(var(--c-surface-paper) / <alpha-value>)",
+          deep: "rgb(var(--c-surface-deep) / <alpha-value>)",
         },
+        // Foreground ink — flips to near-white in dark mode.
         ink: {
-          DEFAULT: "#111827",
-          soft: "#5B6474",
+          DEFAULT: "rgb(var(--c-ink) / <alpha-value>)",
+          soft: "rgb(var(--c-ink-soft) / <alpha-value>)",
         },
       },
       fontFamily: {

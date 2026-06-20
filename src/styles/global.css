@@ -5,8 +5,41 @@
 @tailwind utilities;
 
 @layer base {
+  /* Light theme (default). Colours are exposed as space-separated RGB
+     channels so Tailwind's `rgb(var(--x) / <alpha-value>)` opacity helpers work. */
   :root {
     color-scheme: light;
+
+    --c-surface: 246 243 239; /* #F6F3EF cream */
+    --c-surface-paper: 255 251 245; /* #FFFBF5 */
+    --c-surface-deep: 244 239 232; /* #F4EFE8 */
+
+    --c-ink: 17 24 39; /* #111827 */
+    --c-ink-soft: 91 100 116; /* #5B6474 */
+
+    --c-teal-50: 236 253 248; /* #ECFDF8 */
+    --c-teal-100: 207 250 239; /* #CFFAEF */
+
+    /* Brand accent used for links/active states (brightens in dark). */
+    --c-accent: 15 118 110; /* teal-600 #0F766E */
+  }
+
+  /* Dark theme — deep teal-charcoal surfaces with near-white ink, mirroring
+     the Budgeteer app's dark palette. */
+  .dark {
+    color-scheme: dark;
+
+    --c-surface: 9 18 16; /* page background */
+    --c-surface-paper: 16 31 28; /* cards / elevated panels */
+    --c-surface-deep: 12 24 22; /* alternate surface */
+
+    --c-ink: 233 240 238; /* primary text */
+    --c-ink-soft: 154 176 171; /* secondary text */
+
+    --c-teal-50: 13 39 35; /* soft tint chips/surfaces */
+    --c-teal-100: 17 54 48;
+
+    --c-accent: 94 234 212; /* teal-300 #5EEAD4 */
   }
 
   html {
@@ -26,6 +59,19 @@
       ),
       radial-gradient(circle at 90% -5%, rgba(249, 115, 22, 0.1), transparent 46%);
     background-attachment: fixed;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  .dark body {
+    /* Slightly stronger brand glows read better against the dark surface. */
+    background-image: radial-gradient(
+        circle at 18% -10%,
+        rgba(20, 184, 166, 0.16),
+        transparent 45%
+      ),
+      radial-gradient(circle at 90% -5%, rgba(249, 115, 22, 0.12), transparent 48%);
   }
 
   h1,
@@ -86,6 +132,12 @@
   .btn-ghost:hover {
     @apply border-ink/25 bg-white;
   }
+  .dark .btn-ghost {
+    @apply border-ink/15 bg-white/5 text-ink;
+  }
+  .dark .btn-ghost:hover {
+    @apply border-ink/25 bg-white/10;
+  }
 
   .card {
     @apply rounded-2xl border border-ink/10 bg-cream-paper shadow-card;
@@ -94,6 +146,9 @@
   .eyebrow {
     @apply inline-flex items-center gap-2 rounded-full border border-teal-600/20 bg-teal-50 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-teal-600;
   }
+  .dark .eyebrow {
+    @apply border-teal-400/30 text-teal-300;
+  }
 
   .text-gradient-teal {
     background-image: linear-gradient(120deg, #0f766e, #0d9488 55%, #14b8a6);
@@ -101,6 +156,39 @@
     background-clip: text;
     color: transparent;
   }
+  .dark .text-gradient-teal {
+    /* Brighter ramp keeps the gradient legible on dark surfaces. */
+    background-image: linear-gradient(120deg, #5eead4, #14b8a6 55%, #99f6e0);
+  }
+}
+
+/* The teal-600 accent is too dim on dark surfaces, so brighten link/active
+   text to teal-300. The `.dark` prefix outranks the base utility. */
+.dark .text-teal-600 {
+  color: #5eead4;
+}
+.dark .border-teal-600\/20 {
+  border-color: rgb(94 234 212 / 0.25);
+}
+
+/* Cards/elevated panels need a deeper shadow + hairline highlight in dark. */
+.dark .shadow-card {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 14px 30px rgba(0, 0, 0, 0.45);
+}
+
+.dark ::selection {
+  background: rgba(94, 234, 212, 0.28);
+}
+
+/* Smooth the surface/border swap when toggling themes. */
+.theme-transition,
+.theme-transition * {
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease !important;
 }
 
 /* Respect users who prefer reduced motion across all decorative animation. */
