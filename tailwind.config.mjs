@@ -71,7 +71,7 @@ export default {
         "brand-orange":
           "linear-gradient(120deg, #EA580C 0%, #F97316 60%, #FDBA74 100%)",
         "hero-glow":
-          "radial-gradient(1200px 800px at 8% 0%, rgba(20, 184, 166, 0.18), transparent 60%), radial-gradient(900px 700px at 95% 0%, rgba(249, 115, 22, 0.16), transparent 55%)",
+          "radial-gradient(1200px 800px at 8% 0%, rgba(20, 184, 166, 0.18), transparent 60%), radial-gradient(900px 700px at 95% 0%, rgba(13, 148, 136, 0.14), transparent 55%)",
       },
       keyframes: {
         "fade-up": {

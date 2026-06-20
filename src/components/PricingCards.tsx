@@ -98,7 +98,7 @@ export default function PricingCards() {
                 className={`ml-1.5 rounded-full px-1.5 py-0.5 text-[0.6rem] ${
                   period === "yearly"
                     ? "bg-white/20 text-white"
-                    : "bg-coin-500/15 text-coin-600"
+                    : "bg-teal-500/15 text-teal-600"
                 }`}
               >
                 2 months free
@@ -128,7 +128,7 @@ export default function PricingCards() {
               }`}
             >
               {featured && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-orange px-3 py-1 text-xs font-bold uppercase tracking-wide text-white shadow">
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-teal px-3 py-1 text-xs font-bold uppercase tracking-wide text-white shadow">
                   Recommended
                 </span>
               )}
@@ -147,7 +147,7 @@ export default function PricingCards() {
                   {plan.free ? "forever" : "/mo"}
                 </span>
               </div>
-              <div className="mt-1 h-4 text-xs font-semibold text-coin-600">
+              <div className="mt-1 h-4 text-xs font-semibold text-teal-600">
                 {period === "yearly" && !plan.free && price.amount
                   ? `billed ${fmt(price.amount)}/yr · ${yearlyHint(plan)}`
                   : ""}
