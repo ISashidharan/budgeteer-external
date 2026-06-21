@@ -123,6 +123,19 @@ const jsonLd = {
       }
     </script>
 
+    <!-- Cursor-following spotlight glow for [data-spotlight] cards. -->
+    <script>
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.querySelectorAll<HTMLElement>("[data-spotlight]").forEach((card) => {
+          card.addEventListener("pointermove", (e) => {
+            const r = card.getBoundingClientRect();
+            card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+            card.style.setProperty("--my", `${e.clientY - r.top}px`);
+          });
+        });
+      }
+    </script>
+
     <style is:global>
       [data-reveal] {
         opacity: 0;

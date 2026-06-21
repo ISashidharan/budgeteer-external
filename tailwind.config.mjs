@@ -86,10 +86,17 @@ export default {
           "0%": { transform: "scaleY(0)" },
           "100%": { transform: "scaleY(1)" },
         },
+        // Slow drift for the hero aurora blobs.
+        aurora: {
+          "0%, 100%": { transform: "translate3d(0, 0, 0) scale(1)" },
+          "33%": { transform: "translate3d(3%, -4%, 0) scale(1.08)" },
+          "66%": { transform: "translate3d(-3%, 3%, 0) scale(0.96)" },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both",
         float: "float 6s ease-in-out infinite",
+        aurora: "aurora 18s ease-in-out infinite",
       },
     },
   },

@@ -5,6 +5,7 @@ import CtaBand from "../components/CtaBand.astro";
 import BudgetDemo from "../components/demos/BudgetDemo.tsx";
 import AnalyticsDemo from "../components/demos/AnalyticsDemo.tsx";
 import NetWorthDemo from "../components/demos/NetWorthDemo.tsx";
+import LoanDemo from "../components/demos/LoanDemo.tsx";
 import { SIGN_UP_URL } from "../lib/site";
 
 export const prerender = true;
@@ -36,7 +37,7 @@ const blocks = [
     title: "Know your true cost of borrowing",
     body: "Track every loan with a complete amortization schedule. See your payoff date, total interest, and how extra payments accelerate your path to debt-free.",
     points: ["Full amortization schedules", "Payoff date & interest cost", "Extra-payment scenarios", "Multiple loans at once"],
-    demo: "networth",
+    demo: "loan",
   },
   {
     eyebrow: "Net Worth & Assets",
@@ -88,6 +89,7 @@ const blocks = [
             {b.demo === "budget" && <BudgetDemo client:visible />}
             {b.demo === "analytics" && <AnalyticsDemo client:visible />}
             {b.demo === "networth" && <NetWorthDemo client:visible />}
+            {b.demo === "loan" && <LoanDemo client:visible />}
           </div>
         </div>
       </Section>
