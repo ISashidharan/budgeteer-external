@@ -8,10 +8,7 @@ import HeroDemo from "../components/demos/HeroDemo.tsx";
 import AnalyticsDemo from "../components/demos/AnalyticsDemo.tsx";
 import NetWorthDemo from "../components/demos/NetWorthDemo.tsx";
 import ProductTour from "../components/demos/ProductTour.tsx";
-import StatStrip from "../components/demos/StatStrip.tsx";
 import HowItWorks from "../components/HowItWorks.astro";
-import Testimonials from "../components/Testimonials.astro";
-import BankMarquee from "../components/BankMarquee.astro";
 import { SIGN_UP_URL } from "../lib/site";
 
 export const prerender = true;
@@ -86,18 +83,6 @@ const faqs = [
             <span class="text-teal-600">✓</span> Light &amp; dark mode
           </span>
         </div>
-
-        <!-- Social-proof badge -->
-        <div class="mt-8 inline-flex items-center gap-3 rounded-full border border-ink/10 bg-cream-paper/70 px-4 py-2 backdrop-blur">
-          <span class="flex -space-x-2" aria-hidden="true">
-            {["MR", "DK", "PS", "AM"].map((i) => (
-              <span class="grid h-7 w-7 place-items-center rounded-full border-2 border-cream-paper bg-brand-teal text-[0.6rem] font-bold text-white">{i}</span>
-            ))}
-          </span>
-          <span class="text-sm font-medium text-ink-soft">
-            <span class="font-bold text-coin-400">★ 4.9</span> from 250K+ budgeters
-          </span>
-        </div>
       </div>
 
       <div data-reveal data-reveal-delay="120" class="lg:[perspective:1600px]">
@@ -107,21 +92,6 @@ const faqs = [
       </div>
     </div>
   </section>
-
-  <!-- Bank compatibility marquee -->
-  <section class="border-y border-ink/5 bg-cream-paper/40 py-8">
-    <p class="container-page mb-5 text-center text-xs font-bold uppercase tracking-[0.18em] text-ink-soft">
-      Imports cleanly from 12,000+ banks &amp; institutions
-    </p>
-    <BankMarquee />
-  </section>
-
-  <!-- Animated metrics -->
-  <Section>
-    <div data-reveal>
-      <StatStrip client:visible />
-    </div>
-  </Section>
 
   <!-- Feature grid -->
   <Section
@@ -205,17 +175,6 @@ const faqs = [
       <div data-reveal class="lg:order-1">
         <NetWorthDemo client:visible />
       </div>
-    </div>
-  </Section>
-
-  <!-- Testimonials -->
-  <Section
-    eyebrow="Loved by people like you"
-    title="Money clarity, in their words"
-    subtitle="Join hundreds of thousands of people who replaced spreadsheet chaos with one calm dashboard."
-  >
-    <div data-reveal>
-      <Testimonials />
     </div>
   </Section>
 

@@ -86,29 +86,17 @@ export default {
           "0%": { transform: "scaleY(0)" },
           "100%": { transform: "scaleY(1)" },
         },
-        // Seamless horizontal scroll for marquees (track is duplicated, so
-        // -50% lands exactly on the start of the second copy).
-        marquee: {
-          "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-50%)" },
-        },
         // Slow drift for the hero aurora blobs.
         aurora: {
           "0%, 100%": { transform: "translate3d(0, 0, 0) scale(1)" },
           "33%": { transform: "translate3d(3%, -4%, 0) scale(1.08)" },
           "66%": { transform: "translate3d(-3%, 3%, 0) scale(0.96)" },
         },
-        shimmer: {
-          "100%": { transform: "translateX(100%)" },
-        },
       },
       animation: {
         "fade-up": "fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both",
         float: "float 6s ease-in-out infinite",
-        marquee: "marquee 38s linear infinite",
-        "marquee-slow": "marquee 60s linear infinite",
         aurora: "aurora 18s ease-in-out infinite",
-        shimmer: "shimmer 2.2s ease-in-out infinite",
       },
     },
   },

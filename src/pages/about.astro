@@ -2,7 +2,6 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/Section.astro";
 import CtaBand from "../components/CtaBand.astro";
-import StatStrip from "../components/demos/StatStrip.tsx";
 
 export const prerender = true;
 
@@ -32,12 +31,6 @@ const values = [
       </p>
     </div>
   </section>
-
-  <Section class="!pt-0">
-    <div data-reveal>
-      <StatStrip client:visible />
-    </div>
-  </Section>
 
   <Section align="left" eyebrow="Why we built it" title="Personal finance, minus the friction">
     <div class="grid gap-8 lg:grid-cols-2" data-reveal>
