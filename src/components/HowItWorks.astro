@@ -1,0 +1,60 @@
+---
+/** Three-step "how it works" flow with a connecting line on desktop. */
+const steps = [
+  {
+    n: "01",
+    title: "Connect your money",
+    body: "Import CSV or XLSX statements from any bank, or add accounts by hand. Your full history lands in minutes.",
+    icon: '<path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/>',
+  },
+  {
+    n: "02",
+    title: "Set your plan",
+    body: "Build envelope budgets, log assets and loans. Smart rules auto-categorize the busywork so you don't have to.",
+    icon: '<path d="M3 3v18h18"/><rect x="7" y="11" width="3" height="7"/><rect x="12" y="7" width="3" height="11"/><rect x="17" y="13" width="3" height="5"/>',
+  },
+  {
+    n: "03",
+    title: "Watch wealth grow",
+    body: "Track spending, net worth, and projections in real time. Clear insight turns into better decisions, month after month.",
+    icon: '<path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/>',
+  },
+];
+---
+
+<div class="relative grid gap-8 md:grid-cols-3">
+  <!-- Connecting line behind the cards (desktop only). -->
+  <div
+    class="pointer-events-none absolute left-[16%] right-[16%] top-12 hidden h-px bg-gradient-to-r from-teal-600/0 via-teal-600/35 to-teal-600/0 md:block"
+    aria-hidden="true"
+  >
+  </div>
+
+  {
+    steps.map((s, i) => (
+      <div class="relative text-center" data-reveal data-reveal-delay={i * 110}>
+        <div class="mx-auto inline-flex h-24 w-24 items-center justify-center rounded-3xl border border-teal-600/15 bg-cream-paper shadow-card">
+          <svg
+            width="34"
+            height="34"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="text-teal-600"
+            set:html={s.icon}
+          />
+        </div>
+        <div class="mt-5 font-serif text-sm font-bold tracking-[0.2em] text-teal-600">
+          {s.n}
+        </div>
+        <h3 class="mt-1 font-serif text-xl font-bold text-ink">{s.title}</h3>
+        <p class="mx-auto mt-2 max-w-xs text-[0.95rem] leading-relaxed text-ink-soft">
+          {s.body}
+        </p>
+      </div>
+    ))
+  }
+</div>

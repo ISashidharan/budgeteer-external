@@ -1,0 +1,59 @@
+---
+/**
+ * Two auto-scrolling rows of testimonial cards (opposite directions). The track
+ * is duplicated so the CSS `marquee` keyframe (translateX 0 → -50%) loops
+ * seamlessly. Pauses on hover; collapses to static under reduced-motion via the
+ * global keyframe override.
+ */
+
+interface Quote {
+  body: string;
+  name: string;
+  role: string;
+  initials: string;
+}
+
+const quotes: Quote[] = [
+  { body: "I finally see my whole financial life in one place. Budgeteer replaced three spreadsheets and a banking app.", name: "Maya R.", role: "Product designer", initials: "MR" },
+  { body: "The budget envelopes actually stick. I've saved an extra $400 a month without feeling deprived.", name: "Daniel K.", role: "Software engineer", initials: "DK" },
+  { body: "Watching my net worth line climb every month is weirdly motivating. It's the first finance app I open for fun.", name: "Priya S.", role: "Marketing lead", initials: "PS" },
+  { body: "The loan amortization view showed me I could be debt-free two years early with small extra payments.", name: "Tom W.", role: "Teacher", initials: "TW" },
+  { body: "Importing statements is painless and the auto-categorization is scary good. Setup took ten minutes.", name: "Aisha M.", role: "Founder", initials: "AM" },
+  { body: "Clean, calm, and fast. No ads, no upsells screaming at me. It just helps me make better decisions.", name: "Leo C.", role: "Photographer", initials: "LC" },
+  { body: "Dark mode on my phone, light mode on my laptop — and it remembers. Tiny detail, big delight.", name: "Hannah B.", role: "Nurse", initials: "HB" },
+  { body: "The analytics caught a subscription I forgot I was paying for. It paid for itself the first week.", name: "Marcus T.", role: "Consultant", initials: "MT" },
+];
+
+const rowA = quotes.slice(0, 4);
+const rowB = quotes.slice(4);
+---
+
+<div class="marquee-mask space-y-5 overflow-hidden">
+  {[ { items: rowA, anim: "animate-marquee", dir: "" }, { items: rowB, anim: "animate-marquee-slow", dir: "[animation-direction:reverse]" } ].map((row) => (
+    <div class={`marquee-track flex w-max gap-5 ${row.anim} ${row.dir}`}>
+      {[...row.items, ...row.items].map((q) => (
+        <figure class="glass w-[300px] shrink-0 p-6 sm:w-[360px]">
+          <div class="mb-3 flex gap-0.5 text-coin-400" aria-hidden="true">
+            {Array.from({ length: 5 }).map(() => (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l2.95 6.06 6.69.97-4.84 4.72 1.14 6.66L12 17.77l-5.94 3.13 1.14-6.66L2.36 9.5l6.69-.97L12 2z" />
+              </svg>
+            ))}
+          </div>
+          <blockquote class="text-[0.95rem] leading-relaxed text-ink">
+            "{q.body}"
+          </blockquote>
+          <figcaption class="mt-4 flex items-center gap-3">
+            <span class="grid h-9 w-9 place-items-center rounded-full bg-brand-teal text-xs font-bold text-white">
+              {q.initials}
+            </span>
+            <span>
+              <span class="block text-sm font-bold text-ink">{q.name}</span>
+              <span class="block text-xs text-ink-soft">{q.role}</span>
+            </span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  ))}
+</div>

@@ -7,6 +7,11 @@ import CtaBand from "../components/CtaBand.astro";
 import HeroDemo from "../components/demos/HeroDemo.tsx";
 import AnalyticsDemo from "../components/demos/AnalyticsDemo.tsx";
 import NetWorthDemo from "../components/demos/NetWorthDemo.tsx";
+import ProductTour from "../components/demos/ProductTour.tsx";
+import StatStrip from "../components/demos/StatStrip.tsx";
+import HowItWorks from "../components/HowItWorks.astro";
+import Testimonials from "../components/Testimonials.astro";
+import BankMarquee from "../components/BankMarquee.astro";
 import { SIGN_UP_URL } from "../lib/site";
 
 export const prerender = true;
@@ -46,7 +51,15 @@ const faqs = [
 
 <BaseLayout>
   <!-- Hero -->
-  <section class="relative overflow-hidden bg-hero-glow">
+  <section class="relative isolate overflow-hidden bg-hero-glow">
+    <!-- Decorative layers: drifting aurora blobs + a dotted grid that fades out. -->
+    <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+      <div class="absolute -left-24 -top-24 h-96 w-96 rounded-full bg-teal-400/20 blur-3xl animate-aurora"></div>
+      <div class="absolute right-0 top-10 h-80 w-80 rounded-full bg-coin-400/15 blur-3xl animate-aurora [animation-delay:-6s]"></div>
+      <div class="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-teal-600/15 blur-3xl animate-aurora [animation-delay:-12s]"></div>
+    </div>
+    <div class="pointer-events-none absolute inset-0 -z-10 bg-grid" aria-hidden="true"></div>
+
     <div class="container-page grid items-center gap-12 py-16 lg:grid-cols-2 lg:py-24">
       <div data-reveal>
         <span class="eyebrow">Personal finance, beautifully simple</span>
@@ -73,13 +86,42 @@ const faqs = [
             <span class="text-teal-600">✓</span> Light &amp; dark mode
           </span>
         </div>
+
+        <!-- Social-proof badge -->
+        <div class="mt-8 inline-flex items-center gap-3 rounded-full border border-ink/10 bg-cream-paper/70 px-4 py-2 backdrop-blur">
+          <span class="flex -space-x-2" aria-hidden="true">
+            {["MR", "DK", "PS", "AM"].map((i) => (
+              <span class="grid h-7 w-7 place-items-center rounded-full border-2 border-cream-paper bg-brand-teal text-[0.6rem] font-bold text-white">{i}</span>
+            ))}
+          </span>
+          <span class="text-sm font-medium text-ink-soft">
+            <span class="font-bold text-coin-400">★ 4.9</span> from 250K+ budgeters
+          </span>
+        </div>
       </div>
 
-      <div data-reveal data-reveal-delay="120">
-        <HeroDemo client:visible />
+      <div data-reveal data-reveal-delay="120" class="lg:[perspective:1600px]">
+        <div class="hero-tilt">
+          <HeroDemo client:visible />
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- Bank compatibility marquee -->
+  <section class="border-y border-ink/5 bg-cream-paper/40 py-8">
+    <p class="container-page mb-5 text-center text-xs font-bold uppercase tracking-[0.18em] text-ink-soft">
+      Imports cleanly from 12,000+ banks &amp; institutions
+    </p>
+    <BankMarquee />
+  </section>
+
+  <!-- Animated metrics -->
+  <Section>
+    <div data-reveal>
+      <StatStrip client:visible />
+    </div>
+  </Section>
 
   <!-- Feature grid -->
   <Section
@@ -95,6 +137,33 @@ const faqs = [
       ))}
     </div>
   </Section>
+
+  <!-- How it works -->
+  <Section
+    eyebrow="How it works"
+    title="From scattered to clear in three steps"
+    subtitle="No spreadsheets, no steep learning curve. You'll be up and running in under ten minutes."
+  >
+    <HowItWorks />
+  </Section>
+
+  <!-- Interactive product tour -->
+  <section class="relative isolate overflow-hidden py-16 sm:py-24">
+    <div class="pointer-events-none absolute inset-0 -z-10 bg-grid" aria-hidden="true"></div>
+    <div class="container-page">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <span class="eyebrow">Take the tour</span>
+        <h2 class="mt-4 text-3xl font-bold sm:text-4xl">A live look inside Budgeteer</h2>
+        <p class="mt-4 text-lg leading-relaxed text-ink-soft">
+          Click through the real product — every screen below is the live, animated
+          interface, not a screenshot.
+        </p>
+      </div>
+      <div class="mt-12" data-reveal data-reveal-delay="80">
+        <ProductTour client:visible />
+      </div>
+    </div>
+  </section>
 
   <!-- Deep dive: analytics -->
   <Section eyebrow="Insight" title="See exactly where your money goes" align="left">
@@ -139,6 +208,17 @@ const faqs = [
     </div>
   </Section>
 
+  <!-- Testimonials -->
+  <Section
+    eyebrow="Loved by people like you"
+    title="Money clarity, in their words"
+    subtitle="Join hundreds of thousands of people who replaced spreadsheet chaos with one calm dashboard."
+  >
+    <div data-reveal>
+      <Testimonials />
+    </div>
+  </Section>
+
   <!-- FAQ -->
   <Section eyebrow="Questions" title="Everything you need to know">
     <div data-reveal>
@@ -148,3 +228,21 @@ const faqs = [
 
   <CtaBand />
 </BaseLayout>
+
+<style>
+  /* Subtle 3D lift on the hero mock — settles flat on hover for readability. */
+  .hero-tilt {
+    transform: rotateY(-7deg) rotateX(3deg);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+  .hero-tilt:hover {
+    transform: rotateY(0deg) rotateX(0deg);
+  }
+  @media (max-width: 1023px), (prefers-reduced-motion: reduce) {
+    .hero-tilt {
+      transform: none;
+    }
+  }
+</style>
