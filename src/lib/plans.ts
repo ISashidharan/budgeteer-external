@@ -1,7 +1,8 @@
 /**
- * Pricing tiers — the single source of truth shared by the pricing UI and the
- * Stripe checkout endpoint. Stripe Price IDs are injected from env so the same
- * code runs against test and live modes without edits.
+ * Pricing tiers — the single source of truth for the pricing UI. These amounts
+ * are display-only: checkout itself happens in the AtlasIQ app, which owns the
+ * Stripe Price IDs. The selected plan + period ride along as query params when we
+ * hand off to the app's sign-up (see PricingCards).
  *
  * Annual pricing is billed at 10× the monthly rate (i.e. 2 months free).
  */
@@ -11,8 +12,6 @@ export type BillingPeriod = "monthly" | "yearly";
 export interface PlanPrice {
   /** Display amount in dollars for the chosen period (e.g. 4.99, or 49.9 yearly). */
   amount: number;
-  /** Stripe recurring Price ID (server-side checkout). Empty for the free tier. */
-  priceId: string;
 }
 
 export interface Plan {
@@ -31,11 +30,6 @@ export interface Plan {
   cta: string;
 }
 
-// Stripe price IDs come from env (see .env.example). `import.meta.env` is
-// replaced at build time; we fall back to "" so the site still renders without
-// keys configured (the checkout call will surface a clear error instead).
-const env = import.meta.env;
-
 // LAUNCH FLAG — mirrors AUTO_ENABLED in the app (server/config/plans.js). The
 // Auto tier and Plaid-powered automatic sync are off for launch: Auto is hidden
 // from the pricing grid, AI is priced at the launch rate ($7.99/mo, $79.90/yr)
@@ -45,8 +39,7 @@ const env = import.meta.env;
 const AUTO_ENABLED = false;
 
 // Full catalog (all four tiers). `PLANS` below is the launch-filtered view used
-// by the pricing UI; `planForPriceId` resolves against the full set so a
-// returning checkout for any historical price still maps correctly.
+// by the pricing UI.
 const ALL_PLANS: Plan[] = [
   {
     id: "free",
@@ -55,8 +48,8 @@ const ALL_PLANS: Plan[] = [
     free: true,
     cta: "Start free",
     prices: {
-      monthly: { amount: 0, priceId: "" },
-      yearly: { amount: 0, priceId: "" },
+      monthly: { amount: 0 },
+      yearly: { amount: 0 },
     },
     features: [
       "Track transactions across 2 accounts",
@@ -72,8 +65,8 @@ const ALL_PLANS: Plan[] = [
     tagline: "Everything you need to budget intentionally and stay on track.",
     cta: "Start Pro",
     prices: {
-      monthly: { amount: 4.99, priceId: env.PUBLIC_STRIPE_PRICE_PRO_MONTHLY ?? "" },
-      yearly: { amount: 49.9, priceId: env.PUBLIC_STRIPE_PRICE_PRO_YEARLY ?? "" },
+      monthly: { amount: 4.99 },
+      yearly: { amount: 49.9 },
     },
     featuresLead: "Everything in Free, plus",
     features: [
@@ -91,8 +84,8 @@ const ALL_PLANS: Plan[] = [
     featured: AUTO_ENABLED,
     cta: "Start Auto",
     prices: {
-      monthly: { amount: 9.99, priceId: env.PUBLIC_STRIPE_PRICE_AUTO_MONTHLY ?? "" },
-      yearly: { amount: 99.9, priceId: env.PUBLIC_STRIPE_PRICE_AUTO_YEARLY ?? "" },
+      monthly: { amount: 9.99 },
+      yearly: { amount: 99.9 },
     },
     featuresLead: "Everything in Pro, plus",
     features: [
@@ -110,14 +103,8 @@ const ALL_PLANS: Plan[] = [
     featured: !AUTO_ENABLED,
     cta: "Start AI",
     prices: {
-      monthly: {
-        amount: AUTO_ENABLED ? 14.99 : 7.99,
-        priceId: env.PUBLIC_STRIPE_PRICE_AI_MONTHLY ?? "",
-      },
-      yearly: {
-        amount: AUTO_ENABLED ? 149.9 : 79.9,
-        priceId: env.PUBLIC_STRIPE_PRICE_AI_YEARLY ?? "",
-      },
+      monthly: { amount: AUTO_ENABLED ? 14.99 : 7.99 },
+      yearly: { amount: AUTO_ENABLED ? 149.9 : 79.9 },
     },
     featuresLead: AUTO_ENABLED ? "Everything in Auto, plus" : "Everything in Pro, plus",
     features: [
@@ -134,12 +121,3 @@ const ALL_PLANS: Plan[] = [
 export const PLANS: Plan[] = AUTO_ENABLED
   ? ALL_PLANS
   : ALL_PLANS.filter((p) => p.id !== "auto");
-
-/** Look up the plan that owns a given Stripe Price ID (used post-checkout). */
-export function planForPriceId(priceId: string): Plan | undefined {
-  return ALL_PLANS.find(
-    (p) =>
-      p.prices.monthly.priceId === priceId ||
-      p.prices.yearly.priceId === priceId
-  );
-}

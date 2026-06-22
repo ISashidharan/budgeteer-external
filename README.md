@@ -2,21 +2,21 @@
 
 The public marketing site for **AtlasIQ**, the personal-finance app that helps
 people plan, track, and grow their money. Built with **Astro + Tailwind**,
-deployed on **Vercel**, with **real Stripe Checkout** for subscriptions and
-**code-based animated product demos** (SVG/CSS — no video files).
+deployed on **Vercel**, with **code-based animated product demos** (SVG/CSS — no
+video files). Pricing CTAs hand off to the AtlasIQ app, which owns sign-up and
+Stripe Checkout — this site holds no payment logic or keys.
 
 ## Stack
 
 - [Astro](https://astro.build) (`output: 'server'`, Vercel adapter)
 - [Tailwind CSS](https://tailwindcss.com) — brand tokens mirror the AtlasIQ app
 - [React](https://react.dev) islands for the pricing toggle + animated demos
-- [Stripe](https://stripe.com) Checkout + webhooks
 - `@astrojs/sitemap` for SEO
 
 ## Plans
 
 Four tiers (defined in [`src/lib/plans.ts`](./src/lib/plans.ts), the single source
-of truth shared by the pricing UI and the checkout endpoint):
+of truth for the pricing UI):
 
 | Plan | Monthly | Annual (2 months free) |
 | --- | --- | --- |
@@ -40,25 +40,12 @@ See [`.env.example`](./.env.example). You'll need:
 | Variable | Purpose |
 | --- | --- |
 | `SITE_URL` | Public URL of this site (canonical, OG, sitemap) |
-| `PUBLIC_APP_URL` | AtlasIQ app URL — sign-in / sign-up / post-checkout CTAs |
-| `STRIPE_SECRET_KEY` / `PUBLIC_STRIPE_PUBLISHABLE_KEY` | Stripe API keys (use test keys in dev) |
-| `STRIPE_WEBHOOK_SECRET` | Verifies incoming webhooks |
-| `STRIPE_PRICE_*` | Recurring Price IDs for each plan/period |
+| `PUBLIC_APP_URL` | AtlasIQ app URL — sign-in / sign-up / pricing CTAs |
 
 Pricing tiers live in [`src/lib/plans.ts`](./src/lib/plans.ts) — the single source
-of truth shared by the pricing UI and the checkout endpoint.
-
-## Stripe locally
-
-```bash
-# Forward webhooks to the dev server
-stripe listen --forward-to localhost:4321/api/webhook
-
-# In another terminal, simulate an event
-stripe trigger checkout.session.completed
-```
-
-Test card: `4242 4242 4242 4242`, any future expiry / CVC.
+of truth for the pricing UI. Checkout itself lives in the AtlasIQ app: the pricing
+buttons link to `${PUBLIC_APP_URL}/register?plan=<id>&period=<monthly|yearly>`,
+and the app creates the account and runs Stripe Checkout.
 
 ## Project structure
 
@@ -66,11 +53,10 @@ Test card: `4242 4242 4242 4242`, any future expiry / CVC.
 src/
   components/        Navbar, Footer, Logo, Section, FeatureCard, FAQ, CtaBand, ...
     demos/           Animated React product demos (Hero, Analytics, Budget, NetWorth)
-    PricingCards.tsx Stripe checkout island (monthly/annual toggle)
+    PricingCards.tsx Pricing island (monthly/annual toggle) — links to the app
   layouts/           BaseLayout (SEO/OG/JSON-LD, nav + footer)
-  lib/               plans.ts, stripe.ts, site.ts
-  pages/             index, features, pricing, about, contact, privacy, terms,
-                     success, canceled, api/create-checkout-session, api/webhook
+  lib/               plans.ts, site.ts
+  pages/             index, features, pricing, about, contact, privacy, terms
   styles/global.css  Tailwind + brand design tokens
 ```
 
@@ -82,8 +68,7 @@ npm run build      # outputs .vercel/output
 
 Deploy by connecting the repo to Vercel (zero-config — the `@astrojs/vercel`
 adapter handles the build), or run `vercel` with the CLI. Set the env vars from
-`.env.example` in the Vercel project settings, and point the Stripe webhook at
-`https://<your-domain>/api/webhook`.
+`.env.example` in the Vercel project settings.
 
 > The Vercel runtime uses Node 22. A local Node 24 build prints a harmless
 > version-mismatch warning — it doesn't affect the deployed functions.
