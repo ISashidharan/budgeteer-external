@@ -54,8 +54,8 @@ export default {
           "Arial",
           "sans-serif",
         ],
-        // Space Grotesk gives headings + wordmark a precise, technical feel.
-        serif: ["Space Grotesk", "Inter", "Segoe UI", "sans-serif"],
+        // IBM Plex Serif display headings + wordmark, matching the AtlasIQ app.
+        serif: ["IBM Plex Serif", "Georgia", "Cambria", "serif"],
       },
       borderRadius: {
         xl: "16px",

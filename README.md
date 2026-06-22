@@ -23,7 +23,7 @@ of truth shared by the pricing UI and the checkout endpoint):
 | Free | $0 | — |
 | Pro | $4.99 | $49.90 |
 | Auto | $9.99 | $99.90 |
-| AI | $15.99 | $159.90 |
+| AI | $14.99 | $149.90 |
 
 ## Getting started
 

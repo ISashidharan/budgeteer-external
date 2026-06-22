@@ -194,7 +194,7 @@ export default function PricingCards() {
       </div>
 
       <p className="mt-8 text-center text-sm text-ink-soft">
-        All paid plans include a 14-day money-back guarantee. Prices in USD.
+        Annual plans include a 14-day money-back guarantee. Prices in USD.
       </p>
     </div>
   );

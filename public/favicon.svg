@@ -9,19 +9,38 @@
       <stop stop-color="#FFFFFF" stop-opacity="0.22"/>
       <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="line" x1="120" y1="360" x2="392" y2="150" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#A5B4FC"/>
-      <stop offset="1" stop-color="#22D3EE"/>
-    </linearGradient>
   </defs>
 
   <rect x="32" y="32" width="448" height="448" rx="112" fill="url(#tile)"/>
   <rect x="32" y="32" width="448" height="448" rx="112" fill="url(#sheen)"/>
 
-  <!-- Predictive trend: solid history continuing as a dashed forecast. -->
-  <path d="M120 348 L206 286 L268 318 L344 196" stroke="url(#line)" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <path d="M344 196 L388 162" stroke="#22D3EE" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 46" fill="none"/>
-  <!-- Forecast node out ahead of the curve. -->
-  <circle cx="392" cy="158" r="30" fill="#22D3EE"/>
-  <circle cx="392" cy="158" r="13" fill="#0B1020"/>
+  <!-- Compass rose: cardinal points in white, North tipped in brand cyan. -->
+  <circle cx="256" cy="256" r="206" fill="none" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="6"/>
+  <circle cx="256" cy="256" r="186" fill="none" stroke="#FFFFFF" stroke-opacity="0.2" stroke-width="2"/>
+
+  <!-- Intercardinal star -->
+  <path d="M362.1 149.9 L256 216 L256 256 Z" fill="#FFFFFF" fill-opacity="0.30"/>
+  <path d="M362.1 149.9 L256 256 L296 256 Z" fill="#FFFFFF" fill-opacity="0.18"/>
+  <path d="M362.1 362.1 L296 256 L256 256 Z" fill="#FFFFFF" fill-opacity="0.30"/>
+  <path d="M362.1 362.1 L256 256 L256 296 Z" fill="#FFFFFF" fill-opacity="0.18"/>
+  <path d="M149.9 362.1 L256 296 L256 256 Z" fill="#FFFFFF" fill-opacity="0.30"/>
+  <path d="M149.9 362.1 L256 256 L216 256 Z" fill="#FFFFFF" fill-opacity="0.18"/>
+  <path d="M149.9 149.9 L216 256 L256 256 Z" fill="#FFFFFF" fill-opacity="0.30"/>
+  <path d="M149.9 149.9 L256 256 L256 216 Z" fill="#FFFFFF" fill-opacity="0.18"/>
+
+  <!-- Cardinal star: East / South / West -->
+  <path d="M452 256 L287.1 224.9 L256 256 Z" fill="#FFFFFF"/>
+  <path d="M452 256 L256 256 L287.1 287.1 Z" fill="#FFFFFF" fill-opacity="0.6"/>
+  <path d="M256 452 L256 256 L224.9 287.1 Z" fill="#FFFFFF"/>
+  <path d="M256 452 L287.1 287.1 L256 256 Z" fill="#FFFFFF" fill-opacity="0.6"/>
+  <path d="M60 256 L224.9 287.1 L256 256 Z" fill="#FFFFFF"/>
+  <path d="M60 256 L256 256 L224.9 224.9 Z" fill="#FFFFFF" fill-opacity="0.6"/>
+
+  <!-- North point — brand cyan -->
+  <path d="M256 60 L256 256 L287.1 224.9 Z" fill="#67E8F9"/>
+  <path d="M256 60 L224.9 224.9 L256 256 Z" fill="#22D3EE"/>
+
+  <!-- Center jewel -->
+  <circle cx="256" cy="256" r="26" fill="#FFFFFF"/>
+  <circle cx="256" cy="256" r="10" fill="#22D3EE"/>
 </svg>
