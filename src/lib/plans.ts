@@ -72,8 +72,8 @@ const ALL_PLANS: Plan[] = [
     tagline: "Everything you need to budget intentionally and stay on track.",
     cta: "Start Pro",
     prices: {
-      monthly: { amount: 4.99, priceId: env.STRIPE_PRICE_PRO_MONTHLY ?? "" },
-      yearly: { amount: 49.9, priceId: env.STRIPE_PRICE_PRO_YEARLY ?? "" },
+      monthly: { amount: 4.99, priceId: env.PUBLIC_STRIPE_PRICE_PRO_MONTHLY ?? "" },
+      yearly: { amount: 49.9, priceId: env.PUBLIC_STRIPE_PRICE_PRO_YEARLY ?? "" },
     },
     featuresLead: "Everything in Free, plus",
     features: [
@@ -91,8 +91,8 @@ const ALL_PLANS: Plan[] = [
     featured: AUTO_ENABLED,
     cta: "Start Auto",
     prices: {
-      monthly: { amount: 9.99, priceId: env.STRIPE_PRICE_AUTO_MONTHLY ?? "" },
-      yearly: { amount: 99.9, priceId: env.STRIPE_PRICE_AUTO_YEARLY ?? "" },
+      monthly: { amount: 9.99, priceId: env.PUBLIC_STRIPE_PRICE_AUTO_MONTHLY ?? "" },
+      yearly: { amount: 99.9, priceId: env.PUBLIC_STRIPE_PRICE_AUTO_YEARLY ?? "" },
     },
     featuresLead: "Everything in Pro, plus",
     features: [
@@ -112,11 +112,11 @@ const ALL_PLANS: Plan[] = [
     prices: {
       monthly: {
         amount: AUTO_ENABLED ? 14.99 : 7.99,
-        priceId: env.STRIPE_PRICE_AI_MONTHLY ?? "",
+        priceId: env.PUBLIC_STRIPE_PRICE_AI_MONTHLY ?? "",
       },
       yearly: {
         amount: AUTO_ENABLED ? 149.9 : 79.9,
-        priceId: env.STRIPE_PRICE_AI_YEARLY ?? "",
+        priceId: env.PUBLIC_STRIPE_PRICE_AI_YEARLY ?? "",
       },
     },
     featuresLead: AUTO_ENABLED ? "Everything in Auto, plus" : "Everything in Pro, plus",
