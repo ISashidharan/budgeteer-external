@@ -64,7 +64,7 @@ const moon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke
       localStorage.setItem("theme", theme);
     } catch {}
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", theme === "dark" ? "#09120F" : "#0F766E");
+    if (meta) meta.setAttribute("content", theme === "dark" ? "#0B1020" : "#4F46E5");
     window.setTimeout(() => root.classList.remove("theme-transition"), 320);
   }
 

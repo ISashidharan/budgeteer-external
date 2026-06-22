@@ -13,10 +13,10 @@ const months = [
 const max = Math.max(...months.map((m) => m.v));
 
 const categories = [
-  { label: "Housing", pct: 38, color: "#0F766E" },
-  { label: "Food", pct: 22, color: "#14B8A6" },
-  { label: "Transport", pct: 14, color: "#F97316" },
-  { label: "Other", pct: 26, color: "#FDBA74" },
+  { label: "Housing", pct: 38, color: "#4F46E5" },
+  { label: "Food", pct: 22, color: "#818CF8" },
+  { label: "Transport", pct: 14, color: "#06B6D4" },
+  { label: "Other", pct: 26, color: "#67E8F9" },
 ];
 
 const R = 52;
@@ -51,7 +51,7 @@ export default function AnalyticsDemo() {
                       height: inView ? `${(mo.v / max) * 100}%` : "0%",
                       background:
                         i === months.length - 1
-                          ? "linear-gradient(180deg,#14B8A6,#0F766E)"
+                          ? "linear-gradient(180deg,#818CF8,#4F46E5)"
                           : "rgba(15,118,110,0.22)",
                       transition: reduced
                         ? "none"

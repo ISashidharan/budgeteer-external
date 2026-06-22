@@ -20,7 +20,7 @@ export function getStripe(): Stripe {
   }
   if (!client) {
     client = new Stripe(secretKey, {
-      appInfo: { name: "Budgeteer Marketing Site" },
+      appInfo: { name: "AtlasIQ Marketing Site" },
     });
   }
   return client;
@@ -29,5 +29,5 @@ export function getStripe(): Stripe {
 /** True when Stripe is configured and checkout can proceed. */
 export const isStripeConfigured = () => Boolean(import.meta.env.STRIPE_SECRET_KEY);
 
-/** Absolute base URL of the Budgeteer app, used for post-checkout redirects. */
+/** Absolute base URL of the AtlasIQ app, used for post-checkout redirects. */
 export const APP_URL = import.meta.env.PUBLIC_APP_URL || "http://localhost:3000";

@@ -1,7 +1,7 @@
 import { useInView, useCountUp, usePrefersReducedMotion, fmtUSD } from "./hooks";
 
 /**
- * The hero "marketing video": an auto-playing mock of the Budgeteer dashboard.
+ * The hero "marketing video": an auto-playing mock of the AtlasIQ dashboard.
  * Numbers count up, the net-worth line draws itself, budget bars fill and
  * category donut animates — all in code (SVG + CSS), crisp at any resolution
  * and respectful of prefers-reduced-motion.
@@ -22,10 +22,10 @@ function buildPath(points: number[]) {
 }
 
 const budgets = [
-  { label: "Housing", spent: 1480, total: 1800, color: "#0D9488" },
-  { label: "Groceries", spent: 540, total: 600, color: "#14B8A6" },
-  { label: "Transport", spent: 210, total: 350, color: "#F97316" },
-  { label: "Dining", spent: 320, total: 300, color: "#EA580C" },
+  { label: "Housing", spent: 1480, total: 1800, color: "#6366F1" },
+  { label: "Groceries", spent: 540, total: 600, color: "#818CF8" },
+  { label: "Transport", spent: 210, total: 350, color: "#06B6D4" },
+  { label: "Dining", spent: 320, total: 300, color: "#0891B2" },
 ];
 
 const transactions = [
@@ -56,7 +56,7 @@ export default function HeroDemo() {
           <span className="h-3 w-3 rounded-full bg-[#F59E0B]/70" />
           <span className="h-3 w-3 rounded-full bg-[#10B981]/70" />
           <span className="ml-3 rounded-md bg-ink/5 px-3 py-1 text-xs font-medium text-ink-soft">
-            app.budgeteer.app/dashboard
+            app.atlasiq.app/dashboard
           </span>
         </div>
 
@@ -64,7 +64,7 @@ export default function HeroDemo() {
           {/* Sidebar */}
           <aside className="hidden flex-col gap-1 sm:flex">
             <div className="mb-2 px-2 text-[0.7rem] font-bold uppercase tracking-wider text-ink-soft">
-              Budgeteer
+              AtlasIQ
             </div>
             {[
               { l: "Dashboard", active: true },
@@ -116,15 +116,15 @@ export default function HeroDemo() {
               >
                 <defs>
                   <linearGradient id="nwFill" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#14B8A6" stopOpacity="0.28" />
-                    <stop offset="100%" stopColor="#14B8A6" stopOpacity="0" />
+                    <stop offset="0%" stopColor="#818CF8" stopOpacity="0.28" />
+                    <stop offset="100%" stopColor="#818CF8" stopOpacity="0" />
                   </linearGradient>
                 </defs>
                 <path d={areaPath} fill="url(#nwFill)" className={active ? "nw-area" : "nw-area-hidden"} />
                 <path
                   d={linePath}
                   fill="none"
-                  stroke="#0D9488"
+                  stroke="#6366F1"
                   strokeWidth="3"
                   strokeLinecap="round"
                   strokeLinejoin="round"

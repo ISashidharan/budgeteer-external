@@ -165,7 +165,7 @@ export default function PricingCards() {
                   featured
                     ? {
                         backgroundImage:
-                          "linear-gradient(120deg,#0F766E,#0D9488 55%,#14B8A6)",
+                          "linear-gradient(120deg,#4F46E5,#6366F1 55%,#818CF8)",
                       }
                     : undefined
                 }

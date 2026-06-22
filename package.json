@@ -1,9 +1,9 @@
 {
-  "name": "budgeteer-external",
+  "name": "atlasiq-external",
   "type": "module",
   "version": "1.0.0",
   "private": true,
-  "description": "Marketing & external site for Budgeteer — plan, track, and grow your money.",
+  "description": "Marketing & external site for AtlasIQ — plan, track, and grow your money.",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

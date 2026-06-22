@@ -7,32 +7,34 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Brand teal ramp (mirrors budgeteer/client/src/theme.js).
+        // Brand indigo ramp — AtlasIQ's primary, intelligent/predictive hue.
+        // The `teal` key is retained as the internal token name so existing
+        // utility classes keep working; the values are the new indigo palette.
         // `50`/`100` are soft tint surfaces and flip in dark mode, so they are
         // driven by CSS variables (see global.css); the rest are fixed brand hues.
         teal: {
           50: "rgb(var(--c-teal-50) / <alpha-value>)",
           100: "rgb(var(--c-teal-100) / <alpha-value>)",
-          200: "#99F6E0",
-          300: "#5EEAD4",
-          400: "#14B8A6",
-          500: "#0D9488",
-          600: "#0F766E",
-          700: "#115E59",
-          800: "#0C4A45",
-          900: "#04201C",
+          200: "#C7D2FE",
+          300: "#A5B4FC",
+          400: "#818CF8",
+          500: "#6366F1",
+          600: "#4F46E5",
+          700: "#4338CA",
+          800: "#3730A3",
+          900: "#312E81",
         },
-        // Brand orange / "coin" accent ramp
+        // Brand cyan accent ramp (retains the `coin` token name).
         coin: {
-          200: "#FED7AA",
-          300: "#FDBA74",
-          400: "#FB923C",
-          500: "#F97316",
-          600: "#EA580C",
-          700: "#C2410C",
+          200: "#A5F3FC",
+          300: "#67E8F9",
+          400: "#22D3EE",
+          500: "#06B6D4",
+          600: "#0891B2",
+          700: "#0E7490",
         },
-        // Warm surfaces — variable-driven so they invert to deep teal-charcoal
-        // tones in dark mode without touching markup.
+        // Cool surfaces — variable-driven so they flip from clean light slate
+        // to deep navy (#0B1020) in dark mode without touching markup.
         cream: {
           DEFAULT: "rgb(var(--c-surface) / <alpha-value>)",
           paper: "rgb(var(--c-surface-paper) / <alpha-value>)",
@@ -52,7 +54,8 @@ export default {
           "Arial",
           "sans-serif",
         ],
-        serif: ["IBM Plex Serif", "Segoe UI", "serif"],
+        // Space Grotesk gives headings + wordmark a precise, technical feel.
+        serif: ["Space Grotesk", "Inter", "Segoe UI", "sans-serif"],
       },
       borderRadius: {
         xl: "16px",
@@ -63,15 +66,15 @@ export default {
         card: "0 1px 2px rgba(15, 23, 42, 0.04), 0 14px 30px rgba(15, 23, 42, 0.07)",
         paper: "0 16px 30px rgba(15, 23, 42, 0.08)",
         float: "0 24px 60px rgba(15, 23, 42, 0.16)",
-        glow: "0 10px 30px rgba(13, 148, 136, 0.30)",
+        glow: "0 10px 30px rgba(34, 211, 238, 0.30)",
       },
       backgroundImage: {
         "brand-teal":
-          "linear-gradient(120deg, #0F766E 0%, #0D9488 55%, #14B8A6 100%)",
+          "linear-gradient(120deg, #4F46E5 0%, #6366F1 50%, #22D3EE 100%)",
         "brand-orange":
-          "linear-gradient(120deg, #EA580C 0%, #F97316 60%, #FDBA74 100%)",
+          "linear-gradient(120deg, #0891B2 0%, #06B6D4 60%, #22D3EE 100%)",
         "hero-glow":
-          "radial-gradient(1200px 800px at 8% 0%, rgba(20, 184, 166, 0.18), transparent 60%), radial-gradient(900px 700px at 95% 0%, rgba(13, 148, 136, 0.14), transparent 55%)",
+          "radial-gradient(1200px 800px at 8% 0%, rgba(79, 70, 229, 0.18), transparent 60%), radial-gradient(900px 700px at 95% 0%, rgba(34, 211, 238, 0.14), transparent 55%)",
       },
       keyframes: {
         "fade-up": {

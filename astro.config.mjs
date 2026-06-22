@@ -7,7 +7,7 @@ import vercel from "@astrojs/vercel";
 
 // Public site URL — used for canonical links, sitemap and Open Graph tags.
 // Override via the SITE_URL env var in production.
-const SITE_URL = process.env.SITE_URL || "https://budgeteer.app";
+const SITE_URL = process.env.SITE_URL || "https://atlasiq.app";
 
 // https://astro.build/config
 export default defineConfig({
