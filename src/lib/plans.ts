@@ -36,7 +36,18 @@ export interface Plan {
 // keys configured (the checkout call will surface a clear error instead).
 const env = import.meta.env;
 
-export const PLANS: Plan[] = [
+// LAUNCH FLAG — mirrors AUTO_ENABLED in the app (server/config/plans.js). The
+// Auto tier and Plaid-powered automatic sync are off for launch: Auto is hidden
+// from the pricing grid, AI is priced at the launch rate ($7.99/mo, $79.90/yr)
+// and labelled "Everything in Pro, plus", and AI carries the "Recommended"
+// badge. Flip to `true` (with the app flag) to restore the full four-tier
+// lineup, Auto's pricing/copy, and AI's original $14.99/$149.90 pricing.
+const AUTO_ENABLED = false;
+
+// Full catalog (all four tiers). `PLANS` below is the launch-filtered view used
+// by the pricing UI; `planForPriceId` resolves against the full set so a
+// returning checkout for any historical price still maps correctly.
+const ALL_PLANS: Plan[] = [
   {
     id: "free",
     name: "Free",
@@ -49,7 +60,7 @@ export const PLANS: Plan[] = [
     },
     features: [
       "Track transactions across 2 accounts",
-      "1 monthly budget",
+      "2 monthly budgets",
       "Net-worth snapshot",
       "Manual entry & categorization",
       "Light & dark themes",
@@ -77,7 +88,7 @@ export const PLANS: Plan[] = [
     id: "auto",
     name: "Auto",
     tagline: "Put your finances on autopilot with hands-off importing & sync.",
-    featured: true,
+    featured: AUTO_ENABLED,
     cta: "Start Auto",
     prices: {
       monthly: { amount: 9.99, priceId: env.STRIPE_PRICE_AUTO_MONTHLY ?? "" },
@@ -96,12 +107,19 @@ export const PLANS: Plan[] = [
     id: "ai",
     name: "AI",
     tagline: "Your personal AI money coach — insights, forecasts & answers.",
+    featured: !AUTO_ENABLED,
     cta: "Start AI",
     prices: {
-      monthly: { amount: 14.99, priceId: env.STRIPE_PRICE_AI_MONTHLY ?? "" },
-      yearly: { amount: 149.9, priceId: env.STRIPE_PRICE_AI_YEARLY ?? "" },
+      monthly: {
+        amount: AUTO_ENABLED ? 14.99 : 7.99,
+        priceId: env.STRIPE_PRICE_AI_MONTHLY ?? "",
+      },
+      yearly: {
+        amount: AUTO_ENABLED ? 149.9 : 79.9,
+        priceId: env.STRIPE_PRICE_AI_YEARLY ?? "",
+      },
     },
-    featuresLead: "Everything in Auto, plus",
+    featuresLead: AUTO_ENABLED ? "Everything in Auto, plus" : "Everything in Pro, plus",
     features: [
       "AI spending insights & coaching",
       "Natural-language search & answers",
@@ -112,9 +130,14 @@ export const PLANS: Plan[] = [
   },
 ];
 
+// Launch-visible plans for the pricing grid. Auto is hidden until AUTO_ENABLED.
+export const PLANS: Plan[] = AUTO_ENABLED
+  ? ALL_PLANS
+  : ALL_PLANS.filter((p) => p.id !== "auto");
+
 /** Look up the plan that owns a given Stripe Price ID (used post-checkout). */
 export function planForPriceId(priceId: string): Plan | undefined {
-  return PLANS.find(
+  return ALL_PLANS.find(
     (p) =>
       p.prices.monthly.priceId === priceId ||
       p.prices.yearly.priceId === priceId
