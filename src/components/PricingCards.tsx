@@ -3,7 +3,6 @@ import { PLANS, type BillingPeriod, type Plan } from "../lib/plans";
 
 const APP_URL =
   import.meta.env.PUBLIC_APP_URL || "http://localhost:3000";
-const SIGN_UP_URL = `${APP_URL}/register`;
 
 const Check = () => (
   <svg
@@ -23,41 +22,20 @@ const Check = () => (
 export default function PricingCards() {
   const [period, setPeriod] = useState<BillingPeriod>("monthly");
   const [loadingId, setLoadingId] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
-  async function handleSelect(plan: Plan) {
-    setError(null);
+  function handleSelect(plan: Plan) {
+    setLoadingId(plan.id);
 
-    // Free tier → straight to app sign-up, no Stripe.
-    if (plan.free) {
-      window.location.href = SIGN_UP_URL;
-      return;
-    }
-
-    const priceId = plan.prices[period].priceId;
-    if (!priceId) {
-      setError(
-        "This plan isn't configured for checkout yet. Add its Stripe Price ID to your environment."
-      );
-      return;
-    }
-
-    try {
-      setLoadingId(plan.id);
-      const res = await fetch("/api/create-checkout-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ priceId, plan: plan.id, period }),
-      });
-      const data = await res.json();
-      if (!res.ok || !data.url) {
-        throw new Error(data.error || "Could not start checkout.");
-      }
-      window.location.href = data.url;
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Something went wrong.");
-      setLoadingId(null);
-    }
+    // Route every plan — free and paid — to the app's sign-up rather than
+    // sending paid buyers straight to Stripe. The app creates the account
+    // (collecting a password up front), then kicks off Stripe Checkout for paid
+    // tiers through its own billing flow. This keeps account provisioning in one
+    // place and means the user is logged in and ready the moment payment clears.
+    // The selected plan (and billing period) ride along as query params so the
+    // app can pre-select the tier and continue into checkout.
+    const params = new URLSearchParams({ plan: plan.id });
+    if (!plan.free) params.set("period", period);
+    window.location.href = `${APP_URL}/register?${params.toString()}`;
   }
 
   const fmt = (n: number) =>
@@ -107,12 +85,6 @@ export default function PricingCards() {
           </button>
         ))}
       </div>
-
-      {error && (
-        <div className="mx-auto mb-6 max-w-md rounded-xl border border-coin-500/30 bg-coin-500/10 px-4 py-3 text-center text-sm font-medium text-coin-700">
-          {error}
-        </div>
-      )}
 
       <div
         className={`grid items-stretch gap-5 md:grid-cols-2 ${
