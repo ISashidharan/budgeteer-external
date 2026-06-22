@@ -29,11 +29,11 @@ const icons = {
 };
 
 const features = [
-  { icon: icons.transactions, title: "Effortless transactions", description: "Import statements via CSV or XLSX, auto-categorize with rules, and see every dollar move in a clean, searchable ledger.", accent: "teal" },
-  { icon: icons.budget, title: "Budgets that stick", description: "Plan envelope budgets, watch them fill in real time, and project the months ahead so there are no surprises.", accent: "teal" },
-  { icon: icons.analytics, title: "Clear analytics", description: "Beautiful charts reveal spending trends, category breakdowns, and cash-flow patterns at a glance.", accent: "coin" },
+  { icon: icons.networth, title: "Predictive forecasts", description: "AtlasIQ learns your patterns and projects spending, cash flow, and net worth weeks ahead — so you see the shortfall, or the surplus, before it arrives.", accent: "coin" },
+  { icon: icons.transactions, title: "Automated transactions", description: "Import statements via CSV or XLSX and let smart rules categorize every dollar for you — a clean, searchable ledger that keeps itself tidy.", accent: "teal" },
+  { icon: icons.budget, title: "Budgets that stick", description: "Plan envelope budgets, watch them fill in real time, and get an early warning the moment a category is trending over.", accent: "teal" },
+  { icon: icons.analytics, title: "Intelligent analytics", description: "Beautiful charts surface spending trends, category breakdowns, and the anomalies worth your attention — at a glance.", accent: "coin" },
   { icon: icons.loans, title: "Loan tracking", description: "Track every loan with full amortization schedules so you always know your payoff date and interest cost.", accent: "teal" },
-  { icon: icons.networth, title: "Net worth & assets", description: "Log assets and liabilities to watch your net worth climb month over month — your wealth, visualized.", accent: "coin" },
   { icon: icons.shield, title: "Private & secure", description: "Your finances stay yours. Bank-grade security, no data selling — ever. Light and dark themes included.", accent: "teal" },
 ];
 
@@ -42,7 +42,7 @@ const faqs = [
   { q: "How do I get my data in?", a: "Import CSV or XLSX statements from virtually any bank, or add transactions manually. Smart categorization rules do the tedious sorting for you." },
   { q: "Can I cancel anytime?", a: "Absolutely. Paid plans are month-to-month (or annual) and you can cancel in a click. Annual plans include a 14-day money-back guarantee." },
   { q: "Is my financial data secure?", a: "Security is foundational: encrypted in transit and at rest, with strict access controls. We never sell your data." },
-  { q: "Does it work on mobile?", a: "Budgeteer is a responsive web app that works beautifully on phone, tablet, and desktop — with light and dark themes." },
+  { q: "Does it work on mobile?", a: "AtlasIQ is a responsive web app that works beautifully on phone, tablet, and desktop — with light and dark themes." },
 ];
 ---
 
@@ -59,14 +59,14 @@ const faqs = [
 
     <div class="container-page grid items-center gap-12 py-16 lg:grid-cols-2 lg:py-24">
       <div data-reveal>
-        <span class="eyebrow">Personal finance, beautifully simple</span>
+        <span class="eyebrow">Intelligent personal finance</span>
         <h1 class="mt-5 text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
-          Plan, track, and <span class="text-gradient-teal">grow your money.</span>
+          See where your <span class="text-gradient-teal">money is headed.</span>
         </h1>
         <p class="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">
-          Budgeteer brings transactions, budgets, loans, assets, and net worth into
-          one calm, beautiful place — so you can spend intentionally and build real
-          financial wealth.
+          AtlasIQ turns your transactions into intelligent forecasts — automatically
+          categorizing spending, predicting cash flow, and projecting your net worth
+          so you always know what's coming next.
         </p>
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
           <a href={SIGN_UP_URL} class="btn-primary text-base">Start free — no card</a>
@@ -96,8 +96,8 @@ const faqs = [
   <!-- Feature grid -->
   <Section
     eyebrow="Everything in one place"
-    title="Six money tools, one calm dashboard"
-    subtitle="Stop stitching together spreadsheets and apps. Budgeteer covers your entire financial life end to end."
+    title="Six intelligent tools, one calm dashboard"
+    subtitle="Stop stitching together spreadsheets and apps. AtlasIQ automates the busywork and forecasts what's next across your entire financial life."
   >
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {features.map((f, i) => (
@@ -123,7 +123,7 @@ const faqs = [
     <div class="container-page">
       <div class="mx-auto max-w-2xl text-center" data-reveal>
         <span class="eyebrow">Take the tour</span>
-        <h2 class="mt-4 text-3xl font-bold sm:text-4xl">A live look inside Budgeteer</h2>
+        <h2 class="mt-4 text-3xl font-bold sm:text-4xl">A live look inside AtlasIQ</h2>
         <p class="mt-4 text-lg leading-relaxed text-ink-soft">
           Click through the real product — every screen below is the live, animated
           interface, not a screenshot.
@@ -167,7 +167,7 @@ const faqs = [
         <h2 class="mt-4 text-3xl font-bold sm:text-4xl">Watch your net worth grow</h2>
         <p class="mt-4 text-lg leading-relaxed text-ink-soft">
           Track assets and liabilities side by side and watch the gap widen in your
-          favor. Budgeteer makes long-term progress visible, so building wealth feels
+          favor. AtlasIQ makes long-term progress visible, so building wealth feels
           motivating instead of mysterious.
         </p>
         <a href={SIGN_UP_URL} class="btn-primary mt-7 inline-flex">Start tracking free</a>

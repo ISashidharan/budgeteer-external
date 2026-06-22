@@ -42,8 +42,8 @@ export default function NetWorthDemo() {
       <svg viewBox={`0 0 ${W} ${H}`} className="mt-3 h-40 w-full overflow-visible">
         <defs>
           <linearGradient id="aFill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#14B8A6" stopOpacity="0.25" />
-            <stop offset="100%" stopColor="#14B8A6" stopOpacity="0" />
+            <stop offset="0%" stopColor="#818CF8" stopOpacity="0.25" />
+            <stop offset="100%" stopColor="#818CF8" stopOpacity="0" />
           </linearGradient>
         </defs>
         <path
@@ -54,7 +54,7 @@ export default function NetWorthDemo() {
         <path
           d={aPath}
           fill="none"
-          stroke="#0D9488"
+          stroke="#6366F1"
           strokeWidth="3"
           strokeLinecap="round"
           style={{
@@ -66,7 +66,7 @@ export default function NetWorthDemo() {
         <path
           d={lPath}
           fill="none"
-          stroke="#F97316"
+          stroke="#06B6D4"
           strokeWidth="2.5"
           strokeLinecap="round"
           strokeDasharray={draw ? "6 6" : "1000"}

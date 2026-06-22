@@ -43,8 +43,8 @@ export default function BudgetDemo() {
                   style={{
                     width: inView ? `${pct}%` : "0%",
                     background: over
-                      ? "linear-gradient(90deg,#F97316,#EA580C)"
-                      : "linear-gradient(90deg,#14B8A6,#0F766E)",
+                      ? "linear-gradient(90deg,#06B6D4,#0891B2)"
+                      : "linear-gradient(90deg,#818CF8,#4F46E5)",
                     transition: reduced
                       ? "none"
                       : `width 1s cubic-bezier(0.22,1,0.36,1) ${i * 0.1}s`,

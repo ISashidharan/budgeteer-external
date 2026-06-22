@@ -73,8 +73,8 @@ export default function LoanDemo() {
       >
         <defs>
           <linearGradient id="loanFill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#0D9488" stopOpacity="0.24" />
-            <stop offset="100%" stopColor="#0D9488" stopOpacity="0" />
+            <stop offset="0%" stopColor="#6366F1" stopOpacity="0.24" />
+            <stop offset="100%" stopColor="#6366F1" stopOpacity="0" />
           </linearGradient>
         </defs>
         <path
@@ -85,7 +85,7 @@ export default function LoanDemo() {
         <path
           d={linePath}
           fill="none"
-          stroke="#0F766E"
+          stroke="#4F46E5"
           strokeWidth="3"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -114,7 +114,7 @@ export default function LoanDemo() {
             className="h-full"
             style={{
               width: inView ? `${principalPct}%` : "0%",
-              background: "linear-gradient(90deg,#14B8A6,#0F766E)",
+              background: "linear-gradient(90deg,#818CF8,#4F46E5)",
               transition: reduced
                 ? "none"
                 : "width 1.1s cubic-bezier(0.22,1,0.36,1) 0.3s",
@@ -122,7 +122,7 @@ export default function LoanDemo() {
           />
           <div
             className="h-full flex-1"
-            style={{ background: "linear-gradient(90deg,#FB923C,#EA580C)" }}
+            style={{ background: "linear-gradient(90deg,#22D3EE,#0891B2)" }}
           />
         </div>
       </div>

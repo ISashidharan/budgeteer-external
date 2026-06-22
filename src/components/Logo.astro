@@ -1,12 +1,16 @@
 ---
 /**
- * Inline Budgeteer logo (mark + optional wordmark). Mirrors the app's
+ * Inline AtlasIQ logo (mark + optional wordmark). Mirrors the app's
  * favicon.svg so the brand reads identically across site and product.
+ *
+ * The mark is an indigo tile holding a predictive trend line that rises into
+ * a dashed forecast and a cyan node out ahead — "intelligent, predictive"
+ * at a glance.
  */
 interface Props {
   /** Pixel size of the square mark. */
   size?: number;
-  /** Show the "Budgeteer" wordmark next to the mark. */
+  /** Show the "AtlasIQ" wordmark next to the mark. */
   withText?: boolean;
   class?: string;
 }
@@ -22,39 +26,45 @@ const r = size; // viewBox is square
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     role="img"
-    aria-label="Budgeteer"
+    aria-label="AtlasIQ"
     class="shrink-0"
   >
     <defs>
       <linearGradient id="lg-tile" x1="64" y1="48" x2="448" y2="464" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#14B8A6"></stop>
-        <stop offset="0.55" stop-color="#0D9488"></stop>
-        <stop offset="1" stop-color="#0F766E"></stop>
+        <stop stop-color="#6366F1"></stop>
+        <stop offset="0.55" stop-color="#4F46E5"></stop>
+        <stop offset="1" stop-color="#4338CA"></stop>
       </linearGradient>
-      <linearGradient id="lg-coin" x1="300" y1="116" x2="408" y2="216" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#FDBA74"></stop>
-        <stop offset="0.5" stop-color="#F97316"></stop>
-        <stop offset="1" stop-color="#EA580C"></stop>
+      <linearGradient id="lg-line" x1="120" y1="360" x2="392" y2="150" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#A5B4FC"></stop>
+        <stop offset="1" stop-color="#22D3EE"></stop>
       </linearGradient>
     </defs>
     <rect x="32" y="32" width="448" height="448" rx="112" fill="url(#lg-tile)"></rect>
-    <rect x="120" y="288" width="62" height="98" rx="22" fill="#FFFFFF" fill-opacity="0.55"></rect>
-    <rect x="200" y="240" width="62" height="146" rx="22" fill="#FFFFFF" fill-opacity="0.78"></rect>
-    <rect x="280" y="186" width="62" height="200" rx="22" fill="#FFFFFF"></rect>
-    <circle cx="354" cy="166" r="58" fill="url(#lg-coin)"></circle>
-    <path d="M354 130 L354 202" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round"></path>
+    <!-- Predictive trend: a solid history that continues as a dashed forecast. -->
     <path
-      d="M373 147 C373 137 363 132 352 132 C340 132 332 139 332 149 C332 159 341 163 354 166 C367 169 376 174 376 184 C376 194 367 201 354 201 C342 201 333 196 332 186"
-      stroke="#FFFFFF"
-      stroke-width="11"
+      d="M120 348 L206 286 L268 318 L344 196"
+      stroke="url(#lg-line)"
+      stroke-width="26"
       stroke-linecap="round"
       stroke-linejoin="round"
       fill="none"></path>
+    <path
+      d="M344 196 L388 162"
+      stroke="#22D3EE"
+      stroke-width="26"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-dasharray="2 46"
+      fill="none"></path>
+    <!-- Forecast node — the cyan "IQ" spark out ahead of the curve. -->
+    <circle cx="392" cy="158" r="30" fill="#22D3EE"></circle>
+    <circle cx="392" cy="158" r="13" fill="#0B1020"></circle>
   </svg>
   {
     withText && (
       <span class="font-serif text-xl font-bold tracking-tight text-ink">
-        Budgeteer
+        Atlas<span class="text-gradient-teal">IQ</span>
       </span>
     )
   }

@@ -7,7 +7,7 @@ export const prerender = false;
 /**
  * Stripe webhook receiver. Verifies the signature, then handles subscription
  * lifecycle events. Entitlement is currently logged; wire the TODO below to the
- * Budgeteer app backend when subscriber → user provisioning is built.
+ * AtlasIQ app backend when subscriber → user provisioning is built.
  */
 export const POST: APIRoute = async ({ request }) => {
   const secret = import.meta.env.STRIPE_WEBHOOK_SECRET;
@@ -34,7 +34,7 @@ export const POST: APIRoute = async ({ request }) => {
       console.log(
         `[stripe] checkout completed: customer=${session.customer} email=${session.customer_details?.email} sub=${session.subscription}`
       );
-      // TODO: provision/entitle this customer in the Budgeteer app backend.
+      // TODO: provision/entitle this customer in the AtlasIQ app backend.
       break;
     }
     case "customer.subscription.created":

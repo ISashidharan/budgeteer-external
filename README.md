@@ -1,6 +1,6 @@
-# Budgeteer — Marketing & External Site
+# AtlasIQ — Marketing & External Site
 
-The public marketing site for **Budgeteer**, the personal-finance app that helps
+The public marketing site for **AtlasIQ**, the personal-finance app that helps
 people plan, track, and grow their money. Built with **Astro + Tailwind**,
 deployed on **Vercel**, with **real Stripe Checkout** for subscriptions and
 **code-based animated product demos** (SVG/CSS — no video files).
@@ -8,7 +8,7 @@ deployed on **Vercel**, with **real Stripe Checkout** for subscriptions and
 ## Stack
 
 - [Astro](https://astro.build) (`output: 'server'`, Vercel adapter)
-- [Tailwind CSS](https://tailwindcss.com) — brand tokens mirror the Budgeteer app
+- [Tailwind CSS](https://tailwindcss.com) — brand tokens mirror the AtlasIQ app
 - [React](https://react.dev) islands for the pricing toggle + animated demos
 - [Stripe](https://stripe.com) Checkout + webhooks
 - `@astrojs/sitemap` for SEO
@@ -40,7 +40,7 @@ See [`.env.example`](./.env.example). You'll need:
 | Variable | Purpose |
 | --- | --- |
 | `SITE_URL` | Public URL of this site (canonical, OG, sitemap) |
-| `PUBLIC_APP_URL` | Budgeteer app URL — sign-in / sign-up / post-checkout CTAs |
+| `PUBLIC_APP_URL` | AtlasIQ app URL — sign-in / sign-up / post-checkout CTAs |
 | `STRIPE_SECRET_KEY` / `PUBLIC_STRIPE_PUBLISHABLE_KEY` | Stripe API keys (use test keys in dev) |
 | `STRIPE_WEBHOOK_SECRET` | Verifies incoming webhooks |
 | `STRIPE_PRICE_*` | Recurring Price IDs for each plan/period |
@@ -88,6 +88,6 @@ adapter handles the build), or run `vercel` with the CLI. Set the env vars from
 > The Vercel runtime uses Node 22. A local Node 24 build prints a harmless
 > version-mismatch warning — it doesn't affect the deployed functions.
 
-> Brand identity (colors, fonts, logo) mirrors the Budgeteer app so the site → app
+> Brand identity (colors, fonts, logo) mirrors the AtlasIQ app so the site → app
 > transition feels seamless. The `privacy` and `terms` pages are starting
 > templates — have them reviewed before launch.
