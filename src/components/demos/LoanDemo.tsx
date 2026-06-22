@@ -7,10 +7,11 @@ import { useInView, usePrefersReducedMotion, useCountUp, fmtUSD } from "./hooks"
  * respectful of prefers-reduced-motion.
  */
 
-// Remaining balance over a 30-year mortgage, sampled per year (in $000s).
+// Remaining balance over a 30-year mortgage ($320k @ 4.25%), sampled per year
+// end-of-year (in $000s). 31 points: year 0 through year 30 (payoff).
 const BALANCE = [
-  320, 314, 307, 300, 292, 283, 274, 264, 253, 241, 228, 214, 199, 183, 166,
-  148, 129, 109, 88, 66, 43, 19, 0,
+  320, 315, 309, 303, 297, 291, 284, 277, 270, 262, 254, 246, 237, 228, 219,
+  209, 199, 188, 177, 166, 154, 141, 128, 114, 100, 85, 69, 53, 36, 18, 0,
 ];
 const W = 460;
 const H = 150;
@@ -29,14 +30,15 @@ export default function LoanDemo() {
   const reduced = usePrefersReducedMotion();
   const draw = inView && !reduced;
 
-  const interest = useCountUp(151720, inView, 1600);
-  const monthly = useCountUp(1342, inView, 1400);
+  const interest = useCountUp(246715, inView, 1600);
+  const monthly = useCountUp(1574, inView, 1400);
 
   const linePath = buildPath(BALANCE);
   const areaPath = `${linePath} L ${W} ${H} L 0 ${H} Z`;
 
   // Principal vs. total interest paid over the life of the loan.
-  const principalPct = 68;
+  // $320k principal of $566.7k total paid ≈ 56%.
+  const principalPct = 56;
 
   return (
     <div ref={ref} className="card p-5" aria-hidden="true">

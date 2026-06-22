@@ -98,8 +98,8 @@ export const PLANS: Plan[] = [
     tagline: "Your personal AI money coach — insights, forecasts & answers.",
     cta: "Start AI",
     prices: {
-      monthly: { amount: 15.99, priceId: env.STRIPE_PRICE_AI_MONTHLY ?? "" },
-      yearly: { amount: 159.9, priceId: env.STRIPE_PRICE_AI_YEARLY ?? "" },
+      monthly: { amount: 14.99, priceId: env.STRIPE_PRICE_AI_MONTHLY ?? "" },
+      yearly: { amount: 149.9, priceId: env.STRIPE_PRICE_AI_YEARLY ?? "" },
     },
     featuresLead: "Everything in Auto, plus",
     features: [

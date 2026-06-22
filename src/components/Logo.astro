@@ -3,9 +3,8 @@
  * Inline AtlasIQ logo (mark + optional wordmark). Mirrors the app's
  * favicon.svg so the brand reads identically across site and product.
  *
- * The mark is an indigo tile holding a predictive trend line that rises into
- * a dashed forecast and a cyan node out ahead — "intelligent, predictive"
- * at a glance.
+ * The mark is an indigo tile holding a compass rose — "map your financial
+ * future" — with the North point tipped in brand cyan.
  */
 interface Props {
   /** Pixel size of the square mark. */
@@ -35,31 +34,43 @@ const r = size; // viewBox is square
         <stop offset="0.55" stop-color="#4F46E5"></stop>
         <stop offset="1" stop-color="#4338CA"></stop>
       </linearGradient>
-      <linearGradient id="lg-line" x1="120" y1="360" x2="392" y2="150" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#A5B4FC"></stop>
-        <stop offset="1" stop-color="#22D3EE"></stop>
+      <linearGradient id="lg-sheen" x1="80" y1="60" x2="300" y2="360" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#FFFFFF" stop-opacity="0.22"></stop>
+        <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"></stop>
       </linearGradient>
     </defs>
     <rect x="32" y="32" width="448" height="448" rx="112" fill="url(#lg-tile)"></rect>
-    <!-- Predictive trend: a solid history that continues as a dashed forecast. -->
-    <path
-      d="M120 348 L206 286 L268 318 L344 196"
-      stroke="url(#lg-line)"
-      stroke-width="26"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      fill="none"></path>
-    <path
-      d="M344 196 L388 162"
-      stroke="#22D3EE"
-      stroke-width="26"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-dasharray="2 46"
-      fill="none"></path>
-    <!-- Forecast node — the cyan "IQ" spark out ahead of the curve. -->
-    <circle cx="392" cy="158" r="30" fill="#22D3EE"></circle>
-    <circle cx="392" cy="158" r="13" fill="#0B1020"></circle>
+    <rect x="32" y="32" width="448" height="448" rx="112" fill="url(#lg-sheen)"></rect>
+
+    <!-- Compass rose: cardinal points in white, North tipped in brand cyan. -->
+    <circle cx="256" cy="256" r="206" fill="none" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="6"></circle>
+    <circle cx="256" cy="256" r="186" fill="none" stroke="#FFFFFF" stroke-opacity="0.2" stroke-width="2"></circle>
+
+    <!-- Intercardinal star -->
+    <path d="M362.1 149.9 L256 216 L256 256 Z" fill="#FFFFFF" fill-opacity="0.30"></path>
+    <path d="M362.1 149.9 L256 256 L296 256 Z" fill="#FFFFFF" fill-opacity="0.18"></path>
+    <path d="M362.1 362.1 L296 256 L256 256 Z" fill="#FFFFFF" fill-opacity="0.30"></path>
+    <path d="M362.1 362.1 L256 256 L256 296 Z" fill="#FFFFFF" fill-opacity="0.18"></path>
+    <path d="M149.9 362.1 L256 296 L256 256 Z" fill="#FFFFFF" fill-opacity="0.30"></path>
+    <path d="M149.9 362.1 L256 256 L216 256 Z" fill="#FFFFFF" fill-opacity="0.18"></path>
+    <path d="M149.9 149.9 L216 256 L256 256 Z" fill="#FFFFFF" fill-opacity="0.30"></path>
+    <path d="M149.9 149.9 L256 256 L256 216 Z" fill="#FFFFFF" fill-opacity="0.18"></path>
+
+    <!-- Cardinal star: East / South / West -->
+    <path d="M452 256 L287.1 224.9 L256 256 Z" fill="#FFFFFF"></path>
+    <path d="M452 256 L256 256 L287.1 287.1 Z" fill="#FFFFFF" fill-opacity="0.6"></path>
+    <path d="M256 452 L256 256 L224.9 287.1 Z" fill="#FFFFFF"></path>
+    <path d="M256 452 L287.1 287.1 L256 256 Z" fill="#FFFFFF" fill-opacity="0.6"></path>
+    <path d="M60 256 L224.9 287.1 L256 256 Z" fill="#FFFFFF"></path>
+    <path d="M60 256 L256 256 L224.9 224.9 Z" fill="#FFFFFF" fill-opacity="0.6"></path>
+
+    <!-- North point — brand cyan -->
+    <path d="M256 60 L256 256 L287.1 224.9 Z" fill="#67E8F9"></path>
+    <path d="M256 60 L224.9 224.9 L256 256 Z" fill="#22D3EE"></path>
+
+    <!-- Center jewel -->
+    <circle cx="256" cy="256" r="26" fill="#FFFFFF"></circle>
+    <circle cx="256" cy="256" r="10" fill="#22D3EE"></circle>
   </svg>
   {
     withText && (

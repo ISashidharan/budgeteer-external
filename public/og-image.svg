@@ -9,10 +9,6 @@
       <stop offset="0.55" stop-color="#4F46E5"/>
       <stop offset="1" stop-color="#4338CA"/>
     </linearGradient>
-    <linearGradient id="line" x1="28" y1="94" x2="98" y2="32" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#A5B4FC"/>
-      <stop offset="1" stop-color="#22D3EE"/>
-    </linearGradient>
     <linearGradient id="textTeal" x1="80" y1="0" x2="900" y2="0" gradientUnits="userSpaceOnUse">
       <stop stop-color="#818CF8"/>
       <stop offset="1" stop-color="#22D3EE"/>
@@ -23,19 +19,37 @@
   <circle cx="120" cy="60" r="420" fill="#4F46E5" fill-opacity="0.18"/>
   <circle cx="1120" cy="40" r="360" fill="#22D3EE" fill-opacity="0.12"/>
 
-  <!-- Logo mark -->
+  <!-- Logo mark — compass rose, matching the app favicon. -->
   <g transform="translate(96, 96)">
     <rect width="120" height="120" rx="30" fill="url(#tile)"/>
-    <path d="M28 82 L48 67 L63 75 L81 46" stroke="url(#line)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-    <path d="M81 46 L92 37" stroke="#22D3EE" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.5 11" fill="none"/>
-    <circle cx="92" cy="37" r="8" fill="#22D3EE"/>
-    <circle cx="92" cy="37" r="3.4" fill="#0B1020"/>
+    <g transform="scale(0.234375)">
+      <circle cx="256" cy="256" r="206" fill="none" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="6"/>
+      <circle cx="256" cy="256" r="186" fill="none" stroke="#FFFFFF" stroke-opacity="0.2" stroke-width="2"/>
+      <path d="M362.1 149.9 L256 216 L256 256 Z" fill="#FFFFFF" fill-opacity="0.30"/>
+      <path d="M362.1 149.9 L256 256 L296 256 Z" fill="#FFFFFF" fill-opacity="0.18"/>
+      <path d="M362.1 362.1 L296 256 L256 256 Z" fill="#FFFFFF" fill-opacity="0.30"/>
+      <path d="M362.1 362.1 L256 256 L256 296 Z" fill="#FFFFFF" fill-opacity="0.18"/>
+      <path d="M149.9 362.1 L256 296 L256 256 Z" fill="#FFFFFF" fill-opacity="0.30"/>
+      <path d="M149.9 362.1 L256 256 L216 256 Z" fill="#FFFFFF" fill-opacity="0.18"/>
+      <path d="M149.9 149.9 L216 256 L256 256 Z" fill="#FFFFFF" fill-opacity="0.30"/>
+      <path d="M149.9 149.9 L256 256 L256 216 Z" fill="#FFFFFF" fill-opacity="0.18"/>
+      <path d="M452 256 L287.1 224.9 L256 256 Z" fill="#FFFFFF"/>
+      <path d="M452 256 L256 256 L287.1 287.1 Z" fill="#FFFFFF" fill-opacity="0.6"/>
+      <path d="M256 452 L256 256 L224.9 287.1 Z" fill="#FFFFFF"/>
+      <path d="M256 452 L287.1 287.1 L256 256 Z" fill="#FFFFFF" fill-opacity="0.6"/>
+      <path d="M60 256 L224.9 287.1 L256 256 Z" fill="#FFFFFF"/>
+      <path d="M60 256 L256 256 L224.9 224.9 Z" fill="#FFFFFF" fill-opacity="0.6"/>
+      <path d="M256 60 L256 256 L287.1 224.9 Z" fill="#67E8F9"/>
+      <path d="M256 60 L224.9 224.9 L256 256 Z" fill="#22D3EE"/>
+      <circle cx="256" cy="256" r="26" fill="#FFFFFF"/>
+      <circle cx="256" cy="256" r="10" fill="#22D3EE"/>
+    </g>
   </g>
-  <text x="240" y="178" font-family="Space Grotesk, Inter, sans-serif" font-size="64" font-weight="700" fill="#F8FAFC">AtlasIQ</text>
+  <text x="240" y="178" font-family="'IBM Plex Serif', Georgia, serif" font-size="64" font-weight="700" fill="#F8FAFC">AtlasIQ</text>
 
   <!-- Headline -->
-  <text x="96" y="356" font-family="Space Grotesk, Inter, sans-serif" font-size="86" font-weight="700" fill="#F8FAFC">See where your</text>
-  <text x="96" y="452" font-family="Space Grotesk, Inter, sans-serif" font-size="86" font-weight="700" fill="url(#textTeal)">money is headed.</text>
+  <text x="96" y="356" font-family="'IBM Plex Serif', Georgia, serif" font-size="86" font-weight="700" fill="#F8FAFC">See where your</text>
+  <text x="96" y="452" font-family="'IBM Plex Serif', Georgia, serif" font-size="86" font-weight="700" fill="url(#textTeal)">money is headed.</text>
 
   <!-- Subhead -->
   <text x="98" y="528" font-family="Inter, sans-serif" font-size="34" font-weight="500" fill="#94A3B8">Intelligent forecasts for spending, cash flow &amp; net worth.</text>
