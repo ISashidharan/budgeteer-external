@@ -114,7 +114,11 @@ export default function PricingCards() {
         </div>
       )}
 
-      <div className="grid items-stretch gap-5 md:grid-cols-2 lg:grid-cols-4">
+      <div
+        className={`grid items-stretch gap-5 md:grid-cols-2 ${
+          PLANS.length >= 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"
+        }`}
+      >
         {PLANS.map((plan) => {
           const price = plan.prices[period];
           const featured = plan.featured;
